@@ -1,0 +1,117 @@
+% V. 3.3
+% update 20/10/2022
+\ProvidesPackage{lambdatex}
+
+%% Fundamental packages
+    \RequirePackage[utf8]{inputenc}                             %for text encoding
+    \RequirePackage[italian]{babel}                             %for language elements
+    \RequirePackage[a4paper, portrait, margin=2cm]{geometry}    %paper shape
+    
+%% Header
+    \RequirePackage{fancyhdr}
+    \pagestyle{fancy}
+
+%% Figures
+    \RequirePackage{graphicx}                                   %for adding figures
+    \RequirePackage{wrapfig}                                    %figures alignment
+    \RequirePackage{subcaption}                                 %for subfigures
+
+%% Tables
+    \RequirePackage{array}                                      %table management
+    \RequirePackage{longtable}                                  %multiple page tables
+    \RequirePackage{multirow}                                   %colspan and rowspan
+
+%% Tikz
+    \RequirePackage{tikz}
+    \usetikzlibrary{calc}                                       %Calcs in coordinates
+    \usetikzlibrary{arrows}                                     %required by ggb
+    \RequirePackage{pgfplots}                                   %Plots (required by ggb)
+    \pgfplotsset{compat=1.15}                                   %Corrects compilation warning
+    %\usetikzlibrary{trees}                                     %Tree schemes
+    \RequirePackage{standalone}                                 %external matlab tikz files
+    
+%% Links
+    \RequirePackage{url}                                       %clickable links
+    \usepackage{hyperref}                                      %toc links
+
+%% Symbols and Fonts
+    \RequirePackage{amsfonts}                                   %per simboli insiemi numerici
+    \RequirePackage{amsmath}                                    %per coefficienti binomiali
+    \RequirePackage{amssymb}                                    %per simbolo insieme vuoto \varnothing
+    \usepackage{yhmath}                                         %arco con \wideparen{AB}
+    \usepackage{cancel}                                         %cancel per barrare elementi
+%% Symbols definitions
+    \newcommand\parallelo{/\!/}                                 %simbolo parallelismo
+    \newcommand\sen{\operatorname{sen}}                         %seno
+    \renewcommand\sin{\operatorname{sen}}                       %seno
+    \newcommand\senh{\operatorname{senh}}                         %seno iperbolico
+    \renewcommand\sinh{\operatorname{senh}}                       %seno iperbolico
+    \newcommand\arcsen{\operatorname{arcsen}}                   %arcoseno
+    \renewcommand\arcsin{\operatorname{arcsen}}                 %arcoseno
+    \newcommand\tg{\operatorname{tg}}                           %tangente
+    \newcommand\cotg{\operatorname{cotg}}                       %cotangente
+    \newcommand\arctg{\operatorname{arctg}}                     %arcotangente
+    \newcommand\arccotg{\operatorname{arccotg}}                 %arcocotangente
+    \newcommand\deq{\overset{\mathrm{def}}{=}}                  %uguale definizione
+    \renewcommand\Im{\operatorname{Im}}                         %Parte immaginaria
+    \renewcommand\Re{\operatorname{Re}}                         %Parte immaginaria
+    \newcommand\dom{\operatorname{dom}}                         %dominio
+    \newcommand{\rk}{\operatorname{rk}}                         %rango
+    %arrows
+    \newcommand\Harr{\Leftrightarrow}                           %se e solo se
+    \newcommand\Larr{\Leftarrow}
+    \newcommand\Rarr{\Rightarrow}
+    % Number sets
+    \newcommand\N{\mathbb{N}}
+    \newcommand\Z{\mathbb{Z}}
+    \newcommand\Q{\mathbb{Q}}
+    \newcommand\R{\mathbb{R}}
+    \newcommand\C{\mathbb{C}}
+    %Fields
+    \newcommand\K{\mathbb{K}}
+
+%% Macros
+    \newcommand{\funcdef}[5]{                                   %def funzioni f: X \to Y , x \mapsto f(x)
+        \begin{array}{cccl}
+            #1 : & #2 & \longrightarrow & #3 \\
+                 & #4 & \longmapsto     &#5
+        \end{array}
+        }
+
+%% Graphics
+    \RequirePackage{xcolor}                                     %Custom colors
+    \RequirePackage{mdframed}                                   %Boxes (shaded theorems, ...)
+    %\everymath{\displaystyle}
+    \input{insbox}                                              %Boxes for minipage
+
+%% Text format
+    \usepackage{enumitem}          %modifying enumerations
+    \usepackage{dirtytalk}              %quotes
+    
+%% Theorems
+    \RequirePackage{amsthm}                                     %per teoremi non numerati
+    \renewcommand\qedsymbol{QED}                                %QED Symbol
+    % Definitions - Unnumbered
+    \newtheorem*{theorem}{Teorema}
+    \newtheorem*{definition}{DEF}
+    \newtheorem*{law}{Legge}
+    \newtheorem*{ex*}{Esempio}
+    \newtheorem*{oss}{Osservazione}
+    \newtheorem*{lemma}{Lemma}
+    % Definitions - numbered
+    \newtheorem{ex}{Esempio}[section]
+    \newtheorem{exc}{Esercizio}[section]
+    \newtheorem{axiom}{Assioma}
+    \newtheorem{corollary}{Corollario}
+    %Definitions - shaded (requires mdframed)
+    \newenvironment{shadedTheorem}%
+      {\begin{mdframed}[backgroundcolor=lightgray!40, linecolor=white, innertopmargin=4pt, innerbottommargin=13pt]\begin{theorem}}%
+      {\end{theorem}\end{mdframed}}
+
+    \newenvironment{shaded}%
+      {\begin{mdframed}[backgroundcolor=lightgray!40, linecolor=white, innertopmargin=4pt, innerbottommargin=13pt]}%
+      {\end{mdframed}}
+
+
+%% Meme
+\newcommand{\christmaswedge}{{\displaystyle \color{teal} \bigwedge^{{\color{yellow} \star}}}{\color{red}\!\!\!\!\!\!\!\;\cdot \!\!\;\dot ~.}}
