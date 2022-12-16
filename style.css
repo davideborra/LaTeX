@@ -1,0 +1,428 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body, .page {
+    height: 100%;
+}
+
+
+tt {
+    background-color: lightgrey;
+    padding-inline: 5px;
+    margin-left: 10px
+}
+
+ul{
+    list-style-type: none;
+    padding-left: 20px
+}
+
+
+/* TOP BAR */
+
+header{
+    display: flex;
+    justify-content: space-between;
+    background-color: #0055FF;
+    height: 40px;
+    padding: 15px;
+}
+
+
+.logoContainer {
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+}
+
+.logo {
+    height: 100%;
+    max-width: 40px;
+}
+
+.logoName {
+    padding: 5px;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-weight: normal;
+    font-size: x-large;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style-type: none;
+    color: white;
+    height: 100%;
+    padding-right: 20px;
+    padding-left: 0px;
+}
+
+.menuContainer {
+    width: 100%;
+    height: calc(100% - 80px);
+    background-color: #0055FF;
+    float:left;
+    overflow-x: hidden;
+    overflow-x: scroll;
+}
+
+
+.vMenu {
+    flex-direction: column;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    list-style-type: none;
+    color: white;
+    height: 100%;
+    padding-right: 20px;
+    padding-bottom: 10px;
+}
+.vMenuItem{
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-size: large;
+    padding-left: 10px;
+    padding-right: 5px;
+    margin: 10px;
+}
+.vMenuItem:hover{
+    font-weight: bold;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-thickness: 3px;
+}
+
+.vMenuLink:link {
+    color: white; 
+    text-decoration: none;
+}
+
+.vMenuLink:visited {
+    color: white; 
+    text-decoration: none;
+}
+
+.menuItem {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-size: large;
+    padding-left: 10px;
+    padding-right: 5px;
+}
+
+.menuItem:hover{
+    font-weight: bold;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-thickness: 3px;
+}
+
+.menuLink:link {
+    color: white; 
+    text-decoration: none;
+}
+
+.menuLink:visited {
+    color: white; 
+    text-decoration: none;
+}
+
+/*PAGE CONTAINER*/
+
+.pageContainer {
+    height: calc(100% - 70px);
+}
+
+.pageBody{
+    height: calc(100% - 53px);
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+/*BOTTOM BAR*/
+footer{
+    background-color: #0055ff;
+    min-height: 20px;
+    padding: 15px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+.social{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+}
+
+.social li:nth-child(n){
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 2px;
+    padding-top: 2px;
+}
+
+.socialLink:link {
+    color: white; 
+    text-decoration: none;
+}
+
+.socialLink:visited {
+    color: white; 
+    text-decoration: none;
+}
+
+/* Below here CSS about page */
+
+.heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    background-color: black;
+    height: 300px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 80px;
+    font-weight: bolder;
+}
+
+@media screen and (max-width: 600px) {
+    .heading{
+        font-size: 70px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .heading{
+        font-size: 60px;
+    }
+}
+
+
+
+.sectionTitle {
+    font-family: 'Roboto', sans-serif;
+    padding-left: 20px;
+    padding-bottom: 10px;
+}
+
+.subsectionTitle{
+    font-family: 'Roboto', sans-serif;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+}
+
+.section{
+    padding: 20px;
+    padding-left: 12%;
+    padding-right: 12%;
+    font-family: 'Roboto', sans-serif;
+}
+
+@media screen and (max-width: 800px) {
+    .section{
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+}
+
+/* NEWS */
+.cardsContainer{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.card {
+    width: 300px;
+    border: 2px solid #0055FF;
+    background-color: #0055FF;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 20px;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+.card:hover {
+    border: 2px solid #0055ffcc;
+    background-color: #0055FFcc;
+    cursor: pointer;
+}
+
+.newsTitle{
+    padding: 5px;
+    padding-bottom: 0px;
+}
+
+.newsDate {
+    padding-left: 20px;
+    font-style: italic;
+}
+
+.newsText {
+    text-align: justify;
+}
+
+.newsLink{
+    font-style: italic;
+}
+
+.newsLink:hover {
+    font-weight: bold;
+}
+
+.newsLink:link{
+    color: white;
+}
+
+.newsLink:visited{
+    color: white;
+}
+
+li.aboutMe{
+    padding-left: 1.5rem;
+    text-indent: -1.5rem;
+}
+/*RickRoll*/
+.rickroll:link {
+    color: black; 
+    text-decoration: none;
+}
+
+.rickroll:visited {
+    color: black; 
+    text-decoration: none;
+}
+
+.easterEgg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20rem;
+    font-weight: bolder;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    background-color: #c8d6fd ; /* Zun's favourite colour */; 
+    height: 100%;
+}
+
+
+/* IMAGES */
+.image {
+    border-radius: 20px;
+    width: 100%;
+    margin: 5px;
+}
+
+/* FILTERS */
+.filters {
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid  #0055FF;
+    border-left: 2px solid  #0055FF;
+    border-right: 2px solid  #0055FF;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding-bottom: 10px;
+    border-top: none;
+    color: white;
+    padding-top: 10px
+}
+
+
+.filter {
+    background-color: #0055FF;
+    border-radius: 10px;
+    padding: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border: none;
+}
+
+@media screen and (max-width: 800px) {
+    .filters{
+        flex-direction: column;
+        align-items:center;
+    }
+    .filter, .filtersButton{
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-top: 10px;
+    }
+}
+
+.filtersButton {
+    background-color: #0055FF;
+    border-radius: 10px;
+    padding: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border: none;
+    color: white;
+    font-size:large;
+    border: 1px solid white;
+}
+
+.filtersButton:active{
+    background-color: white;
+    color: #0055ff;
+    border: 1px solid #0055FF;
+}
+
+.filtersButton:hover {
+    background-color: #0055ffcc;
+}
+
+.filtersButton:active{
+    background-color: white;
+    color: #0055ff;
+    border: 1px solid #0055FF;
+}
+
+select {
+    border: 1px solid #0055FF;
+    border-radius: 5px;
+}
+
+/* COLUMN VIEW */
+
+.columnsContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.column {
+    max-width: 50%;
+    padding: 10px;
+    line-height: 30px;
+}
+
+@media screen and (max-width: 800px) {
+    .column {
+        max-width: 100%;
+    }
+    .columnsContainer{
+        flex-direction: column;
+	}
+}
+
+
+/* SINGLE FEATURES */
+.nopaddingtop {
+    padding-top: 0;
+}
+
+.textAlignCenter {
+    text-align: center;
+}
