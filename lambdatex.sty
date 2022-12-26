@@ -58,6 +58,7 @@
     \renewcommand\Re{\operatorname{Re}}                         %Parte immaginaria
     \newcommand\dom{\operatorname{dom}}                         %dominio
     \newcommand{\rk}{\operatorname{rk}}                         %rango
+    \renewcommand*{\d}{\:\text{d}}                              %differential
     %arrows
     \newcommand\Harr{\Leftrightarrow}                           %se e solo se
     \newcommand\Larr{\Leftarrow}
@@ -112,6 +113,9 @@
 
     \newenvironment{shaded}%
       {\begin{mdframed}[backgroundcolor=lightgray!40, linecolor=white, innertopmargin=4pt, innerbottommargin=13pt]}%
+      {\end{mdframed}}
+    \newenvironment{lineframe}%
+      {\begin{mdframed}[linecolor=black, innertopmargin=0pt, innerbottommargin=10pt]}%
       {\end{mdframed}}
 
 
