@@ -20,10 +20,6 @@ var app = new Vue({
         ],
     },
     mounted(){
-        this.width = window.innerWidth;
-        if (this.width < 800){
-            this.bigScreen=false;
-        }
     },
     methods: {
         showMenu(){

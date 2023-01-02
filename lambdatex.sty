@@ -76,7 +76,7 @@
     \newcommand{\funcdef}[5]{                                   %def funzioni f: X \to Y , x \mapsto f(x)
         \begin{array}{cccl}
             #1 : & #2 & \longrightarrow & #3 \\
-                 & #4 & \longmapsto     &#5
+                 & #4 & \longmapsto     & #5
         \end{array}
         }
 
@@ -90,6 +90,16 @@
     \usepackage{enumitem}          %modifying enumerations
     \usepackage{dirtytalk}              %quotes
     
+
+%% Frames
+    \newenvironment{shaded}%
+    {\begin{mdframed}[backgroundcolor=lightgray!40, linecolor=white, innertopmargin=4pt, innerbottommargin=13pt]}%
+    {\end{mdframed}}
+
+    \newenvironment{lineframe}%
+    {\begin{mdframed}[linecolor=black, innertopmargin=0pt, innerbottommargin=10pt]}%
+    {\end{mdframed}}
+
 %% Theorems
     \RequirePackage{amsthm}                                     %per teoremi non numerati
     \renewcommand\qedsymbol{QED}                                %QED Symbol
@@ -111,12 +121,8 @@
       {\begin{mdframed}[backgroundcolor=lightgray!40, linecolor=white, innertopmargin=4pt, innerbottommargin=13pt]\begin{theorem}}%
       {\end{theorem}\end{mdframed}}
 
-    \newenvironment{shaded}%
-      {\begin{mdframed}[backgroundcolor=lightgray!40, linecolor=white, innertopmargin=4pt, innerbottommargin=13pt]}%
-      {\end{mdframed}}
-    \newenvironment{lineframe}%
-      {\begin{mdframed}[linecolor=black, innertopmargin=0pt, innerbottommargin=10pt]}%
-      {\end{mdframed}}
+    \newenvironment{boxdef}{\begin{lineframe}\begin{definition}}{\end{definition}\end{lineframe}}
+
 
 
 %% Meme

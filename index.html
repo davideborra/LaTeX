@@ -30,12 +30,12 @@
                         Davide Borra
                     </h1>
             </a>
-            <ul class="menu" v-if="bigScreen">
+            <ul class="menu bigScreen">
                 <li class="menuItem" v-for="item in menuItems">
                     <a :href="item.pageSrc" class="menuLink">{{ item.name }}</a>
                 </li>
             </ul>
-            <div class="menu" v-if="!bigScreen" @click="showMenu">
+            <div class="menu smallScreen"  @click="showMenu">
                 <i class="fas fa-bars"></i>
             </div>
         </header>
