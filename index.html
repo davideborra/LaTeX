@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Davide Borra</title>
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
@@ -67,6 +68,8 @@
             <!-- end page body-->
             <footer v-if="!menuIsVisible">
                 <ul class="social">
+                    <li @click="changeTheme" v-if="this.dark"><i class="fa-regular fa-moon"></i></li>
+                    <li @click="changeTheme" v-if="!this.dark"><i class="fa-solid fa-moon"></i></li>
                     <li><a href="https://www.instagram.com/davide_borra/" class="socialLink"><i class="fa-brands fa-instagram"></i> davide_borra</li>
                     <li><a href="https://t.me/DBorra" class="socialLink"><i class="fa-brands fa-telegram"></i> DBorra</a></li>
                     <li><a href="mailto: davide.borra@studenti.unitn.it" class="socialLink"><i class="fa-regular fa-envelope"></i> davide.borra@studenti.unitn.it</a></li>
