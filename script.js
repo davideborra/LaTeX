@@ -1,8 +1,14 @@
 var level = 1;
+
+Vue.component("modal", {
+    template: "#modal-template"
+  });
+
 var app = new Vue({
     el: "#vueContainer",
     data: {
         menuIsVisible: false,
+        showModal: false,
         menuItems: [
             {
                 name: "",
@@ -25,6 +31,6 @@ var app = new Vue({
             }else{
                 setDark(true, level);
             }
-        }
+        }       
     }
 });

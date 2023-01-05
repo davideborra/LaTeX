@@ -21,6 +21,36 @@
     <!-- To automatically render math in text elements, include the auto-render extension: -->
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
         onload="renderMathInElement(document.body);"></script>
+        <script type="text/x-template" id="modal-template">
+            <transition name="modal">
+              <div class="modal-mask">
+                <div class="modal-wrapper">
+                  <div class="modal-container">
+      
+                    <div class="modal-header">
+                      <slot name="header">
+                        Creative Commons </h3>
+                      </slot>
+                    </div>
+      
+                    <div class="modal-body">
+                      <slot name="body">
+                        <p xmlns:cc="http://creativecommons.org/ns#" >This web page and its content, if not specified, is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Attribution-NonCommercial-ShareAlike 4.0 International<div class= "ccImg"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></div></a></p>
+                      </slot>
+                    </div>
+      
+                    <div class="modal-footer">
+                      <slot name="footer">
+                        <button class="modal-default-button" @click="$emit('close')">
+                          OK
+                        </button>
+                      </slot>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </transition>
+          </script>
 </head>
 <body>
     <div id="vueContainer" class="page">
@@ -66,15 +96,17 @@
             </div>
         </div>
             <!-- end page body-->
-            <footer v-if="!menuIsVisible">
-                <ul class="social">
-                    <li @click="changeTheme" v-if="this.dark"><i class="fa-regular fa-moon"></i></li>
-                    <li @click="changeTheme" v-if="!this.dark"><i class="fa-solid fa-moon"></i></li>
-                    <li><a href="https://www.instagram.com/davide_borra/" class="socialLink"><i class="fa-brands fa-instagram"></i> davide_borra</li>
-                    <li><a href="https://t.me/DBorra" class="socialLink"><i class="fa-brands fa-telegram"></i> DBorra</a></li>
-                    <li><a href="mailto: davide.borra@studenti.unitn.it" class="socialLink"><i class="fa-regular fa-envelope"></i> davide.borra@studenti.unitn.it</a></li>
-                </ul>
-            </footer>
+        <footer v-if="!menuIsVisible">
+            <modal v-if="showModal" @close="showModal = false"></modal>
+            <ul class="social">
+                <li @click="changeTheme()" v-if="dark"><i class="fa-regular fa-moon"></i></li>
+                <li @click="changeTheme()" v-if="!dark"><i class="fa-solid fa-moon"></i></li>
+                <li @click="showModal = true"> <i class="fa-brands fa-creative-commons"></i></li>
+                <li><a href="https://www.instagram.com/davide_borra/" class="socialLink"><i class="fa-brands fa-instagram"></i> davide_borra</li>
+                <li><a href="https://t.me/DBorra" class="socialLink"><i class="fa-brands fa-telegram"></i> DBorra</a></li>
+                <li><a href="mailto: davide.borra@studenti.unitn.it" class="socialLink"><i class="fa-regular fa-envelope"></i> davide.borra@studenti.unitn.it</a></li>
+            </ul>
+        </footer>
         </div>
         </div>
     </div>
