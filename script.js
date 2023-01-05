@@ -13,7 +13,7 @@ var app = new Vue({
     mounted(){
         checkCookie();
         setDark(dark, level);
-        this.menuItems=loadLinks(0);
+        this.menuItems=loadLinks(level);
     },
     methods: {
         showMenu(){
