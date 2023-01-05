@@ -1,38 +1,30 @@
+var level = 1;
 var app = new Vue({
     el: "#vueContainer",
     data: {
-        width: 10,
         menuIsVisible: false,
-        dark: false,
         menuItems: [
             {
-                name: "Appunti",
-                pageSrc: "../appunti"
-            },
-            {
-                name: "LaTeX",
-                pageSrc: "../LaTeX"
-            },
-            {
-                name: "Informatica",
-                pageSrc: "../informatica"
+                name: "",
+                pageSrc: ""
             }
         ],
     },
     mounted(){
+        checkCookie();
+        setDark(dark, level);
+        this.menuItems=loadLinks(0);
     },
     methods: {
         showMenu(){
             this.menuIsVisible = !this.menuIsVisible;
         },
         changeTheme(){
-            var theme = document.getElementsByTagName('link')[1];
-            if (theme.getAttribute('href') == '../dark.css') {
-                theme.setAttribute('href', '');
-            } else {
-                theme.setAttribute('href', '../dark.css');
+            if(dark){
+                setDark(false, level);
+            }else{
+                setDark(true, level);
             }
-            this.dark=!this.dark;
         }
     }
 });
