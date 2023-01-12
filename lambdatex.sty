@@ -1,4 +1,4 @@
-% V. 3.4
+% V. 3.5
 % update 20/10/2022
 \ProvidesPackage{lambdatex}
 
@@ -42,7 +42,7 @@
     \usepackage{cancel}                                         %cancel per barrare elementi
     \usepackage{esint}                                          %integrali particolari (e.g. \fint)
 %% Symbols definitions
-    \newcommand\parallelo{/\!/}                                 %simbolo parallelismo
+    \newcommand\parallelo{{/\!/}}                                 %simbolo parallelismo
     \newcommand\sen{\operatorname{sen}}                         %seno
     \renewcommand\sin{\operatorname{sen}}                       %seno
     \newcommand\senh{\operatorname{senh}}                         %seno iperbolico
@@ -105,7 +105,9 @@
     \renewcommand\qedsymbol{QED}                                %QED Symbol
     % Definitions - Unnumbered
     \newtheorem*{theorem}{Teorema}
+    \theoremstyle{definition}
     \newtheorem*{definition}{DEF}
+    \theoremstyle{plain}
     \newtheorem*{law}{Legge}
     \newtheorem*{ex*}{Esempio}
     \newtheorem*{oss}{Osservazione}
