@@ -99,8 +99,7 @@
         <footer v-if="!menuIsVisible">
             <modal v-if="showModal" @close="showModal = false"></modal>
             <ul class="social">
-                <li @click="changeTheme()" v-if="dark"><i class="fa-regular fa-moon"></i></li>
-                <li @click="changeTheme()" v-if="!dark"><i class="fa-solid fa-moon"></i></li>
+                <li @click="changeTheme()"><i class="fa-solid fa-moon"></i></li>
                 <li @click="showModal = true"> <i class="fa-brands fa-creative-commons"></i></li>
                 <li><a href="https://www.instagram.com/davide_borra/" class="socialLink"><i class="fa-brands fa-instagram"></i> davide_borra</li>
                 <li><a href="https://t.me/DBorra" class="socialLink"><i class="fa-brands fa-telegram"></i> DBorra</a></li>
