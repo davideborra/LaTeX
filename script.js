@@ -6,6 +6,7 @@ Vue.component("modal", {
 
 var app = new Vue({
     el: "#vueContainer",
+    dark: false,
     data: {
         menuIsVisible: false,
         showModal: false,
@@ -20,6 +21,7 @@ var app = new Vue({
         checkCookie();
         setDark(dark, level);
         this.menuItems=loadLinks(level);
+        app.dark = dark;
     },
     methods: {
         showMenu(){
@@ -31,6 +33,7 @@ var app = new Vue({
             }else{
                 setDark(true, level);
             }
+            app.dark = dark;
         }       
     }
 });
