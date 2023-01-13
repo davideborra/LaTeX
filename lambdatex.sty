@@ -100,6 +100,11 @@
     {\begin{mdframed}[linecolor=black, innertopmargin=0pt, innerbottommargin=10pt]}%
     {\end{mdframed}}
 
+%% Text boxes
+    \newenvironment{focus}[1][Focus]
+    {\begin{mdframed}[linecolor=black, innertopmargin=8pt, innerbottommargin=10pt]\textbf{\large #1.}\vspace{3pt}\\}
+    {\end{mdframed}}
+
 %% Theorems
     \RequirePackage{amsthm}                                     %per teoremi non numerati
     \renewcommand\qedsymbol{QED}                                %QED Symbol
