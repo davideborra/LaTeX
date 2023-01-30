@@ -29,13 +29,11 @@
       
                     <div class="modal-header">
                       <slot name="header">
-                        Creative Commons </h3>
                       </slot>
                     </div>
       
                     <div class="modal-body">
                       <slot name="body">
-                        <p xmlns:cc="http://creativecommons.org/ns#" >This web page and its content, if not specified, is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Attribution-NonCommercial-ShareAlike 4.0 International<div class= "ccImg"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></div></a></p>
                       </slot>
                     </div>
       
@@ -97,7 +95,18 @@
         </div>
             <!-- end page body-->
         <footer v-if="!menuIsVisible">
-            <modal v-if="showModal" @close="showModal = false"></modal>
+            <modal v-if="showModal" @close="showModal = false">
+                <h3 slot="header">Creative Commons</h3>
+                <div slot="body">
+                    <p xmlns:cc="http://creativecommons.org/ns#">This web page and its content, if not specified, is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Attribution-NonCommercial-ShareAlike 4.0 International<div class= "ccImg"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></div></a></p>
+                </div>
+            </modal>
+            <modal v-if="showCookies" @close="showCookies = false">
+                <h3 slot="header">🍪 Biscotti 🍪</h3>
+                <div slot="body">
+                    Questo sito utilizza dei cookie tecnici per memorizzare il tema scuro. Lo so che questa cosa non interessa a nessuno ma devo dirlo. Spero che nessuno si offenda.
+                </div>
+            </modal>
             <ul class="social">
                 <li @click="changeTheme()"><i class="fa-solid fa-moon"></i></li>
                 <li @click="showModal = true"> <i class="fa-brands fa-creative-commons"></i></li>
