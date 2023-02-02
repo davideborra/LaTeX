@@ -1,5 +1,5 @@
-% V. 3.5
-% update 20/10/2022
+% V. 4.0
+% update 02/02/2023
 \ProvidesPackage{lambdatex}
 
 %% Fundamental packages
@@ -109,28 +109,50 @@
     \RequirePackage{amsthm}                                     %per teoremi non numerati
     \renewcommand\qedsymbol{QED}                                %QED Symbol
     % Definitions - Unnumbered
-    \newtheorem*{theorem}{Teorema}
-    \theoremstyle{definition}
-    \newtheorem*{definition}{DEF}
-    \theoremstyle{plain}
-    \newtheorem*{law}{Legge}
-    \newtheorem*{ex*}{Esempio}
+    
+    \theoremstyle{definition} %stile con testo normale
     \newtheorem*{oss}{Osservazione}
+    \newtheorem*{definition}{DEF}
+
+    \theoremstyle{plain} %stile con testo italico
+    \newtheorem*{theorem}{Teorema}
+    \newtheorem*{law}{Legge}
+    \newtheorem*{esempio*}{\color{teal}Esempio}
     \newtheorem*{lemma}{Lemma}
     \newtheorem*{corollary*}{Corollario}
     % Definitions - numbered
-    \newtheorem{ex}{Esempio}[section]
+    \newtheorem{esempio}{\color{teal}Esempio}[section]
     \newtheorem{exc}{Esercizio}[section]
     \newtheorem{axiom}{Assioma}
     \newtheorem{corollary}{Corollario}
-    %Definitions - shaded (requires mdframed)
+    %Definitions - shaded/boxed (requires mdframed)
     \newenvironment{shadedTheorem}%
       {\begin{mdframed}[backgroundcolor=lightgray!40, linecolor=white, innertopmargin=4pt, innerbottommargin=13pt]\begin{theorem}}%
       {\end{theorem}\end{mdframed}}
 
     \newenvironment{boxdef}{\begin{lineframe}\begin{definition}}{\end{definition}\end{lineframe}}
 
+    \newenvironment{ex}[1][testo]{
+        \begin{mdframed}[linewidth=1.5pt,linecolor=teal, innertopmargin=-15pt, innerbottommargin=10pt, topline=false,
+            rightline=false,]
+        \begin{esempio}~\\
+            #1
+        \end{esempio}\vspace{5pt}
+    }{
+        \end{mdframed}
+    }
 
+    \newenvironment{ex*}[1][testo]{
+        \begin{mdframed}[linewidth=1.5pt,linecolor=teal, innertopmargin=-15pt, innerbottommargin=10pt, topline=false,
+            rightline=false,]
+        \begin{esempio*}~\\
+            #1
+        \end{esempio*}\vspace{5pt}
+    }{
+        \end{mdframed}
+    }
+
+    
 
 %% Meme
 \newcommand{\christmaswedge}{{\displaystyle \color{teal} \bigwedge^{{\color{yellow} \star}}}{\color{red}\!\!\!\!\!\!\!\;\cdot \!\!\;\dot ~.}}
