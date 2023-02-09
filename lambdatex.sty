@@ -1,5 +1,5 @@
-% V. 4.0
-% update 02/02/2023
+% V. 4.1
+% update 09/02/2023
 \ProvidesPackage{lambdatex}
 
 %% Fundamental packages
@@ -85,6 +85,8 @@
     \RequirePackage{mdframed}                                   %Boxes (shaded theorems, ...)
     %\everymath{\displaystyle}
     \input{insbox}                                              %Boxes for minipage
+    \RequirePackage[most]{tcolorbox}                %example boxes
+    \tcbuselibrary{skins}
 
 %% Text format
     \usepackage{enumitem}          %modifying enumerations
@@ -111,17 +113,18 @@
     % Definitions - Unnumbered
     
     \theoremstyle{definition} %stile con testo normale
-    \newtheorem*{oss}{Osservazione}
     \newtheorem*{definition}{DEF}
-
+    
+    \theoremstyle{remark}
+    \newtheorem*{oss}{Osservazione}
+    \newtheorem*{ricorda}{Ricorda}
+    
     \theoremstyle{plain} %stile con testo italico
     \newtheorem*{theorem}{Teorema}
     \newtheorem*{law}{Legge}
-    \newtheorem*{esempio*}{\color{teal}Esempio}
     \newtheorem*{lemma}{Lemma}
     \newtheorem*{corollary*}{Corollario}
     % Definitions - numbered
-    \newtheorem{esempio}{\color{teal}Esempio}[section]
     \newtheorem{exc}{Esercizio}[section]
     \newtheorem{axiom}{Assioma}
     \newtheorem{corollary}{Corollario}
@@ -132,26 +135,59 @@
 
     \newenvironment{boxdef}{\begin{lineframe}\begin{definition}}{\end{definition}\end{lineframe}}
 
+
+
+    \newtcolorbox[auto counter,number within=section]{esempio}
+        {title={\textbf{Esempio \thetcbcounter.}},
+        coltitle=teal,
+        colbacktitle=white,
+        skin=bicolor,
+        colbacklower=white,
+        colback=teal!20!white,
+        colframe=teal, 
+        breakable,
+        arc=0mm, 
+        rightrule=0mm,
+        toprule=0mm,
+        titlerule=0mm,
+        }
+
     \newenvironment{ex}[1][testo]{
-        \begin{mdframed}[linewidth=1.5pt,linecolor=teal, innertopmargin=-15pt, innerbottommargin=10pt, topline=false,
-            rightline=false,]
-        \begin{esempio}~\\
-            #1
-        \end{esempio}\vspace{5pt}
+        \begin{esempio}
+        \textit{#1}
+        \tcblower
     }{
-        \end{mdframed}
+        \end{esempio}
     }
+
+    \newtcolorbox{esempio*}
+        {title={\textbf{Esempio.}},
+        coltitle=teal,
+        colbacktitle=white,
+        skin=bicolor,
+        colbacklower=white,
+        colback=teal!20!white,
+        colframe=teal, 
+        breakable,
+        arc=0mm, 
+        rightrule=0mm,
+        toprule=0mm,
+        titlerule=0mm,
+        }
 
     \newenvironment{ex*}[1][testo]{
-        \begin{mdframed}[linewidth=1.5pt,linecolor=teal, innertopmargin=-15pt, innerbottommargin=10pt, topline=false,
-            rightline=false,]
-        \begin{esempio*}~\\
-            #1
-        \end{esempio*}\vspace{5pt}
+        \begin{esempio*}
+        \textit{#1}
+        \tcblower
     }{
-        \end{mdframed}
+        \end{esempio*}
     }
 
+    
+    
+    %plain Theorem, Lemma, Corollary, Proposition, Conjecture, Criterion, Assertion
+    %definition Definition, Condition, Problem, Example, Exercise, Algorithm, Question, Axiom, Property, Assumption, Hypothesis
+    %remark Remark, Note, Notation, Claim, Summary, Acknowledgment, Case, Conclusion
     
 
 %% Meme
