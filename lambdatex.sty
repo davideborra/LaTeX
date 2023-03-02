@@ -1,9 +1,10 @@
-% V. 4.2
-% update 09/02/2023
+% V. 4.4
+% update 27/02/2023
 \ProvidesPackage{lambdatex}
 
 %% Fundamental packages
     \RequirePackage[utf8]{inputenc}                             %for text encoding
+    \RequirePackage[T1]{fontenc}    %font completi
     \RequirePackage[italian]{babel}                             %for language elements
     \RequirePackage[a4paper, portrait, margin=2cm]{geometry}    %paper shape
     
@@ -21,6 +22,10 @@
     \RequirePackage{longtable}                                  %multiple page tables
     \RequirePackage{multirow}                                   %colspan and rowspan
 
+%% Excercizes
+    \usepackage{tasks}
+    \usepackage{exsheets}
+
 %% Tikz
     \RequirePackage{tikz}
     \usetikzlibrary{calc}                                       %Calcs in coordinates
@@ -32,15 +37,20 @@
     
 %% Links
     \RequirePackage{url}                                       %clickable links
-    \usepackage{hyperref}                                      %toc links
+    \RequirePackage{hyperref}                                      %toc links
 
 %% Symbols and Fonts
     \RequirePackage{amsfonts}                                   %per simboli insiemi numerici
     \RequirePackage{amsmath}                                    %per coefficienti binomiali
     \RequirePackage{amssymb}                                    %per simbolo insieme vuoto \varnothing
-    \usepackage{yhmath}                                         %arco con \wideparen{AB}
-    \usepackage{cancel}                                         %cancel per barrare elementi
-    \usepackage{esint}                                          %integrali particolari (e.g. \fint)
+    \RequirePackage{yhmath}                                         %arco con \wideparen{AB}
+    \RequirePackage{cancel}                                         %cancel per barrare elementi
+    \RequirePackage{esint}                                          %integrali particolari (e.g. \fint)
+
+    \DeclareFontFamily{OT1}{pzc}{}                          %per avere mathpzc che è meglio di mathcal perchè ha le minuscole
+    \DeclareFontShape{OT1}{pzc}{m}{it}%
+    {<-> s * [1.15] pzcmi7t}{}
+    \DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
 %% Symbols definitions
     \newcommand\parallelo{{/\!/}}                                 %simbolo parallelismo
     \newcommand\sen{\operatorname{sen}}                         %seno
@@ -89,8 +99,8 @@
     \tcbuselibrary{skins}
 
 %% Text format
-    \usepackage{enumitem}          %modifying enumerations
-    \usepackage{dirtytalk}              %quotes
+    \RequirePackage{enumitem}          %modifying enumerations
+    \RequirePackage{dirtytalk}              %quotes
     
 
 %% Frames
