@@ -1,4 +1,4 @@
-% V. 4.5
+% V. 4.6
 % update 27/02/2023
 \ProvidesPackage{lambdatex}
 
@@ -69,6 +69,8 @@
     \newcommand\dom{\operatorname{dom}}                         %dominio
     \newcommand{\rk}{\operatorname{rk}}                         %rango
     \renewcommand*{\d}{\:\text{d}}                              %differential
+    \let\sottosp\vartriangleleft                                %sottospazio vettoriale
+    \newcommand{\gln}[2]{\mathpzc{Gl}_{#1}(#2)}                 %Gruppo lineare generale
     %arrows
     \newcommand\Harr{\Leftrightarrow}                           %se e solo se
     \newcommand\Larr{\Leftarrow}
@@ -81,6 +83,8 @@
     \newcommand\C{\mathbb{C}}
     %Fields
     \newcommand\K{\mathbb{K}}
+    %Spazi affini
+    \newcommand\A{\mathbb{A}}
 
 %% Macros
     \newcommand{\funcdef}[5]{                                   %def funzioni f: X \to Y , x \mapsto f(x)
