@@ -1,12 +1,17 @@
-% V. 5.0
-% update 09/03/2023
+% V. 4.6
+% update 27/02/2023
 \ProvidesPackage{lambdatex}
 
 %% Fundamental packages
     \RequirePackage[utf8]{inputenc}                             %for text encoding
-    \RequirePackage[T1]{fontenc}                                %font completi
+    \RequirePackage[T1]{fontenc}    %font completi
     \RequirePackage[italian]{babel}                             %for language elements
+    \RequirePackage[a4paper, portrait, margin=2cm]{geometry}    %paper shape
     
+%% Header
+    \RequirePackage{fancyhdr}
+    \pagestyle{fancy}
+
 %% Figures
     \RequirePackage{graphicx}                                   %for adding figures
     \RequirePackage{wrapfig}                                    %figures alignment
@@ -32,26 +37,26 @@
     
 %% Links
     \RequirePackage{url}                                       %clickable links
-    \RequirePackage{hyperref}                                  %toc links
+    \RequirePackage{hyperref}                                      %toc links
 
 %% Symbols and Fonts
     \RequirePackage{amsfonts}                                   %per simboli insiemi numerici
     \RequirePackage{amsmath}                                    %per coefficienti binomiali
     \RequirePackage{amssymb}                                    %per simbolo insieme vuoto \varnothing
-    \RequirePackage{yhmath}                                     %arco con \wideparen{AB}
-    \RequirePackage{cancel}                                     %cancel per barrare elementi
-    \RequirePackage{esint}                                      %integrali particolari (e.g. \fint)
+    \RequirePackage{yhmath}                                         %arco con \wideparen{AB}
+    \RequirePackage{cancel}                                         %cancel per barrare elementi
+    \RequirePackage{esint}                                          %integrali particolari (e.g. \fint)
 
-    \DeclareFontFamily{OT1}{pzc}{}                              %per avere mathpzc che è meglio di mathcal perchè ha le minuscole
+    \DeclareFontFamily{OT1}{pzc}{}                          %per avere mathpzc che è meglio di mathcal perchè ha le minuscole
     \DeclareFontShape{OT1}{pzc}{m}{it}%
     {<-> s * [1.15] pzcmi7t}{}
     \DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
 %% Symbols definitions
-    \newcommand\parallelo{{/\!/}}                               %simbolo parallelismo
+    \newcommand\parallelo{{/\!/}}                                 %simbolo parallelismo
     \newcommand\sen{\operatorname{sen}}                         %seno
     \renewcommand\sin{\operatorname{sen}}                       %seno
-    \newcommand\senh{\operatorname{senh}}                       %seno iperbolico
-    \renewcommand\sinh{\operatorname{senh}}                     %seno iperbolico
+    \newcommand\senh{\operatorname{senh}}                         %seno iperbolico
+    \renewcommand\sinh{\operatorname{senh}}                       %seno iperbolico
     \newcommand\arcsen{\operatorname{arcsen}}                   %arcoseno
     \renewcommand\arcsin{\operatorname{arcsen}}                 %arcoseno
     \newcommand\tg{\operatorname{tg}}                           %tangente
@@ -94,9 +99,12 @@
     \RequirePackage{mdframed}                                   %Boxes (shaded theorems, ...)
     %\everymath{\displaystyle}
     \input{insbox}                                              %Boxes for minipage
+    \RequirePackage[most]{tcolorbox}                %example boxes
+    \tcbuselibrary{skins}
 
 %% Text format
-    \RequirePackage{dirtytalk}                                  %quotes
+    \RequirePackage{enumitem}          %modifying enumerations
+    \RequirePackage{dirtytalk}              %quotes
     
 
 %% Frames
@@ -114,39 +122,88 @@
     {\end{mdframed}}
 
 %% Theorems
-\RequirePackage{amsthm}                                         %per teoremi non numerati
-\renewcommand\qedsymbol{QED}                                    %QED Symbol
+    \RequirePackage{amsthm}                                     %per teoremi non numerati
+    \renewcommand\qedsymbol{QED}                                %QED Symbol
     % Definitions - Unnumbered
-
-    \theoremstyle{definition}                                   %stile con testo normale
+    
+    \theoremstyle{definition} %stile con testo normale
     \newtheorem*{definition}{DEF}
-
-    \theoremstyle{remark}                                       %stile con nome italico e testo normale
+    
+    \theoremstyle{remark}
     \newtheorem*{oss}{Osservazione}
     \newtheorem*{ricorda}{Ricorda}
-
-    \theoremstyle{plain}                                        %stile con testo italico
+    
+    \theoremstyle{plain} %stile con testo italico
     \newtheorem*{theorem}{Teorema}
     \newtheorem*{law}{Legge}
     \newtheorem*{lemma}{Lemma}
     \newtheorem*{corollary*}{Corollario}
     \newtheorem{prop}{Proposizione}[section]
     % Definitions - numbered
-        \newtheorem{exc}{Esercizio}[section]
-        \newtheorem{axiom}{Assioma}
-        \newtheorem{corollary}{Corollario}
+    \newtheorem{exc}{Esercizio}[section]
+    \newtheorem{axiom}{Assioma}
+    \newtheorem{corollary}{Corollario}
     %Definitions - shaded/boxed (requires mdframed)
-        \newenvironment{shadedTheorem}%
-        {\begin{mdframed}[backgroundcolor=lightgray!40, linecolor=white, innertopmargin=4pt, innerbottommargin=13pt]\begin{theorem}}%
-        {\end{theorem}\end{mdframed}}
+    \newenvironment{shadedTheorem}%
+      {\begin{mdframed}[backgroundcolor=lightgray!40, linecolor=white, innertopmargin=4pt, innerbottommargin=13pt]\begin{theorem}}%
+      {\end{theorem}\end{mdframed}}
 
-        \newenvironment{boxdef}{\begin{lineframe}\begin{definition}}{\end{definition}\end{lineframe}}
+    \newenvironment{boxdef}{\begin{lineframe}\begin{definition}}{\end{definition}\end{lineframe}}
 
 
-%plain Theorem, Lemma, Corollary, Proposition, Conjecture, Criterion, Assertion
-%definition Definition, Condition, Problem, Example, Exercise, Algorithm, Question, Axiom, Property, Assumption, Hypothesis
-%remark Remark, Note, Notation, Claim, Summary, Acknowledgment, Case, Conclusion
 
+    \newtcolorbox[auto counter,number within=section]{esempio}
+        {title={\textbf{Esempio \thetcbcounter.}},
+        coltitle=teal,
+        colbacktitle=white,
+        skin=bicolor,
+        colbacklower=white,
+        colback=teal!20!white,
+        colframe=teal, 
+        breakable,
+        arc=0mm, 
+        rightrule=0mm,
+        toprule=0mm,
+        titlerule=0mm,
+        }
+
+    \newenvironment{ex}[1][testo]{
+        \begin{esempio}
+        \textit{#1}
+        \tcblower
+    }{
+        \end{esempio}
+    }
+
+    \newtcolorbox{esempio*}
+        {title={\textbf{Esempio.}},
+        coltitle=teal,
+        colbacktitle=white,
+        skin=bicolor,
+        colbacklower=white,
+        colback=teal!20!white,
+        colframe=teal, 
+        breakable,
+        arc=0mm, 
+        rightrule=0mm,
+        toprule=0mm,
+        titlerule=0mm,
+        }
+
+    \newenvironment{ex*}[1][testo]{
+        \begin{esempio*}
+        \textit{#1}
+        \tcblower
+    }{
+        \end{esempio*}
+    }
+
+    
+    
+    %plain Theorem, Lemma, Corollary, Proposition, Conjecture, Criterion, Assertion
+    %definition Definition, Condition, Problem, Example, Exercise, Algorithm, Question, Axiom, Property, Assumption, Hypothesis
+    %remark Remark, Note, Notation, Claim, Summary, Acknowledgment, Case, Conclusion
+    
 
 %% Meme
 \newcommand{\christmaswedge}{{\displaystyle \color{teal} \bigwedge^{{\color{yellow} \star}}}{\color{red}\!\!\!\!\!\!\!\;\cdot \!\!\;\dot ~.}}
