@@ -1,4 +1,4 @@
-% V. 1.0
+% V. 1.1
 % update 09/03/2023
 
 \ProvidesPackage{lambdabook}
@@ -107,4 +107,23 @@
     }{
     \end{esempio*}
     }
+
+    \newtcolorbox{gridtcolorbox}{enhanced, arc=0mm, boxrule=0.25mm, colframe=black!20, colback=white, breakable,
+    underlay={
+        \begin{tcbclipinterior}
+            \draw[help lines, step=5mm, black!20, shift={(interior.north west)}]
+                (interior.south west) grid (interior.north east);
+        \end{tcbclipinterior}
+    }
+    }
+
+% min height 0.59, max height 24.9
+    \newcommand{\grid}[2][0.59cm]{
+        \begin{gridtcolorbox}
+        \vspace{#1}
+        \vphantom{#2}    
+    \end{gridtcolorbox}
+    }
+
+
 \endinput
