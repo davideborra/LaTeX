@@ -1,0 +1,129 @@
+% V. 1.1
+% update 09/03/2023
+
+\ProvidesPackage{lambdabook}
+
+\DeclareOption{article}{
+
+}
+
+\DeclareOption{book}{
+    \newcommand{\opening}[1][0.0]{
+        \lhead{}
+        \chead{}
+        \rhead{Indice}
+        \rfoot{\runauthor}
+        
+        \begin{titlepage}
+            \newgeometry{left=3cm, right=3cm, bottom=2cm, top =3cm} 
+            \pagestyle{empty}
+            \begin{center}
+                \vspace*{\fill}
+                \vspace{0.5cm}
+                \textbf{\Huge \runtitle}\\\vspace{5mm}
+                \textsc{\Large \runauthor}
+                \vspace{5cm}
+            \end{center}
+            \vspace*{\fill}
+            v. #1\\
+            \rule{0.8\linewidth}{0.5mm}\\
+            {\footnotesize\href{mailto:davide.borra@studenti.unitn.it}{davide.borra@studenti.unitn.it} - \href{http://davideborra.github.io}{davideborra.github.io}}
+            \restoregeometry
+        \end{titlepage}
+        \thispagestyle{empty}
+        \frontmatter
+            \tableofcontents
+            \creativecommons
+        \mainmatter
+        \lhead{\runtitle}
+        \chead{}
+        \rhead{\leftmark\ - \rightmark}
+        \rfoot{\runauthor}
+        }
+}
+
+%% Fallback
+    \DeclareOption*{
+    \ClassWarning{lambdabook}{Unknown option '\CurrentOption'}
+    }
+
+\ProcessOptions\relax
+
+%% Fundamental Packages
+    \RequirePackage[a4paper, portrait, margin=2cm]{geometry}    %paper shape
+
+%% Header
+    \RequirePackage{fancyhdr}
+    \pagestyle{fancy}
+%% Text format
+    \RequirePackage{enumitem}          %modifying enumerations
+
+%% Examples
+    \RequirePackage[most]{tcolorbox}                %example boxes
+    \tcbuselibrary{skins}
+
+    \newtcolorbox[auto counter,number within=section]{esempio}
+    {title={\textbf{Esempio \thetcbcounter.}},
+    coltitle=teal,
+    colbacktitle=white,
+    skin=bicolor,
+    colbacklower=white,
+    colback=teal!20!white,
+    colframe=teal, 
+    breakable,
+    arc=0mm, 
+    rightrule=0mm,
+    toprule=0mm,
+    titlerule=0mm,
+    }
+
+    \newenvironment{ex}[1][testo]{
+    \begin{esempio}
+    \textit{#1}
+    \tcblower
+    }{
+    \end{esempio}
+    }
+
+    \newtcolorbox{esempio*}
+    {title={\textbf{Esempio.}},
+    coltitle=teal,
+    colbacktitle=white,
+    skin=bicolor,
+    colbacklower=white,
+    colback=teal!20!white,
+    colframe=teal, 
+    breakable,
+    arc=0mm, 
+    rightrule=0mm,
+    toprule=0mm,
+    titlerule=0mm,
+    }
+
+    \newenvironment{ex*}[1][testo]{
+    \begin{esempio*}
+    \textit{#1}
+    \tcblower
+    }{
+    \end{esempio*}
+    }
+
+    \newtcolorbox{gridtcolorbox}{enhanced, arc=0mm, boxrule=0.25mm, colframe=black!20, colback=white, breakable,
+    underlay={
+        \begin{tcbclipinterior}
+            \draw[help lines, step=5mm, black!20, shift={(interior.north west)}]
+                (interior.south west) grid (interior.north east);
+        \end{tcbclipinterior}
+    }
+    }
+
+% min height 0.59, max height 24.9
+    \newcommand{\grid}[2][0.59cm]{
+        \begin{gridtcolorbox}
+        \vspace{#1}
+        \vphantom{#2}    
+    \end{gridtcolorbox}
+    }
+
+
+\endinput

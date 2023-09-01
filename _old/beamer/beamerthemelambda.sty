@@ -1,0 +1,140 @@
+% V. 1.0
+% update 09/03/23
+\ProvidesPackage{beamerthemelambda}%basato su UC Berkeley.sty
+
+\DeclareOption{galilei}{
+    \definecolor{first}{RGB}{0, 85, 255}
+    \definecolor{second}{RGB}{0, 85, 255}
+    \definecolor{third}{RGB}{47, 47, 47}
+    \definecolor{fourth}{RGB}{255, 255, 255}
+    \pgfdeclareimage[height=0.14\paperheight]{logo}{images/logogalilei.png}
+}
+
+\DeclareOption{unitn}{
+    \pgfdeclareimage[height=0.12\paperheight]{logo}{images/unitrentologo.jpg}
+    \definecolor{first}{RGB}{177, 11, 37}
+    \definecolor{second}{RGB}{255, 255, 255}
+    \definecolor{third}{RGB}{47, 47, 47}
+    \definecolor{fourth}{RGB}{0, 0, 0}
+    }
+    
+%% Fallback
+\DeclareOption*{
+  \ClassWarning{lambdabook}{Unknown option '\CurrentOption'}
+  }
+
+\ProcessOptions\relax
+\setbeamertemplate{navigation symbols}{}
+
+
+\RequirePackage{ragged2e}
+\RequirePackage{etoolbox}
+%\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{caption}[numbered]
+%testo giustificato
+\apptocmd{\frame}{}{\justifying}{}
+\apptocmd{\column}{}{\justifying}{}
+\makeatletter
+\renewcommand{\itemize}[1][]{%
+    \beamer@ifempty{#1}{}{\def\beamer@defaultospec{#1}}%
+    \ifnum \@itemdepth >2\relax\@toodeep\else
+    \advance\@itemdepth\@ne
+    \beamer@computepref\@itemdepth% sets \beameritemnestingprefix
+    \usebeamerfont{itemize/enumerate \beameritemnestingprefix body}%
+    \usebeamercolor[fg]{itemize/enumerate \beameritemnestingprefix body}%
+    \usebeamertemplate{itemize/enumerate \beameritemnestingprefix body begin}%
+    \list
+    {\usebeamertemplate{itemize \beameritemnestingprefix item}}
+    {\def\makelabel##1{%
+            {%
+                \hss\llap{{%
+                        \usebeamerfont*{itemize \beameritemnestingprefix item}%
+                        \usebeamercolor[fg]{itemize \beameritemnestingprefix item}##1}}%
+            }%
+        }%
+    }
+}
+%------------------------------------------------------------------
+\RequirePackage{epigraph} %eserga o epigrafi
+\setlength\epigraphwidth{0.8\textwidth}
+\setlength\epigraphrule{0pt}
+\renewcommand{\textflush}{flushepinormal}
+\renewcommand{\familydefault}{\rmdefault} 
+%------------------------------------------------------------------
+\RequirePackage{tikz} %grafiche alla base della pagina
+
+
+%Colori ufficiali del template UC Berkeley
+\definecolor{BerkeleyGold}{RGB}{193,129,45}
+\definecolor{Medalist}{HTML}{C4820E}
+\definecolor{BerkeleyBlueText}{RGB}{48,99,126}
+\definecolor{FoundersRock}{HTML}{3B7EA1}
+\definecolor{BerkeleyTableGold}{RGB}{222,157,46}
+\definecolor{CaliforniaGold}{HTML}{FDB515}
+\definecolor{BerkeleyTableBlue1}{RGB}{207,226,234}
+\definecolor{BerkeleyTableBlue2}{RGB}{232,241,245}
+\definecolor{BerkeleyBlue}{HTML}{003262}
+
+\setbeamertemplate{title page}[default][left]
+\setbeamerfont{title}{family=\rmfamily,size=\Huge}
+\setbeamerfont{author}{family=\rmfamily,shape=\scshape,size=\large}
+\setbeamerfont{institute}{size=\normalsize,shape=\scshape, family=\rmfamily}
+\setbeamerfont{date}{size=\normalsize, family=\rmfamily}
+
+\setbeamercolor{section in toc}{fg=BerkeleyBlue}
+\setbeamercolor{subsection in toc}{fg=third}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}{\leavevmode\leftskip=3.2em\rlap{\hskip-2em\inserttocsectionnumber.\inserttocsubsectionnumber}\inserttocsubsection\par}
+
+\setbeamersize{text margin left=2em, text margin right=2em}
+
+\setbeamertemplate{frametitle}{\vskip0.06\paperheight\insertframetitle} 
+\setbeamerfont{frametitle}{family=\rmfamily,series=\mdseries,size=\Large}
+\setbeamerfont{block title}{family=\rmfamily,size=\large}
+\setbeamercolor{titlelike}{fg=first}
+\setbeamercolor{author}{fg=third}
+\setbeamercolor{institute}{fg=third}
+\setbeamercolor{date}{fg=third}
+\setbeamercolor{normal text}{fg=black}
+\setbeamercolor{structure}{fg=third}
+\setbeamercolor{block title}{fg=first}
+
+\setbeamertemplate{itemize item}{\textbullet}
+\setbeamertemplate{itemize subitem}{--}
+\setbeamertemplate{itemize subsubitem}{\textbullet}
+\setlength{\leftmargini}{1.25em}
+\setlength{\leftmarginii}{1em}
+\setlength{\leftmarginiii}{1em}
+
+%impostare sempre un'immagine dal titolo di una sola parola
+
+
+\setbeamertemplate{background}{%
+\begin{tikzpicture}[overlay,remember picture]
+    \fill[second] (current page.south west) -- +(0, 0.08\paperheight)node[anchor=east](A){} -- +(\paperwidth, 0.18\paperheight)node[anchor=west](B){} -- (current page.south east) -- cycle;  
+    \draw[first, ultra thick] (A)--(B);
+%\node[anchor=south west,inner sep=0pt,draw=none,yshift=-6pt,xshift=-1pt] at (current page.south west) {\pgfuseimage{blueslope}};%
+\node[anchor=south east,inner sep=0pt,draw=none,xshift=-0.018\paperheight,yshift=0.02\paperheight] at (current page.south east) {\pgfuseimage{logo}};
+\node[anchor=south,inner sep=0pt,draw=none,yshift=0.03\paperheight, color = lightgray] at (current page.south){\insertslidenavigationsymbol};
+\node[anchor=south west,inner sep=0pt,draw=none,xshift=0.1\paperheight,yshift=0.03\paperheight, color=fourth] at (current page.south west) { Lezioni Entusiasmanti in Serata Accademica};
+\end{tikzpicture}%
+}
+
+
+\newcommand{\smallframetitle}{%
+  \setbeamertemplate{frametitle}{\vskip0.15\paperheight\insertframetitle}
+  \setbeamerfont{frametitle}{size=\large,series=\bfseries}
+}
+\newcommand{\normalframetitle}{%
+  \setbeamertemplate{frametitle}{\vskip0.15\paperheight\insertframetitle} 
+  \setbeamerfont{frametitle}{size=\LARGE,series=\mdseries}
+}
+
+\renewcommand{\arraystretch}{1.2}
+\newcommand{\tableheadcol}[1]{{\bfseries\color{black}#1}}
+\AtBeginEnvironment{tabular}{\color{black}}
+
+
+\newenvironment{shadedef}%
+        {\begin{mdframed}[backgroundcolor=first!20, linecolor=white, innertopmargin=4pt, innerbottommargin=13pt]\begin{definition}}%
+        {\end{definition}\end{mdframed}}
