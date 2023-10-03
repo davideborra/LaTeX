@@ -1,5 +1,5 @@
-% V. 5.1
-% update 09/03/2023
+% V. 5.2
+% update 03/10/2023
 \ProvidesPackage{lambdatex}
 
 %% Fundamental packages
@@ -84,6 +84,20 @@
     \newcommand\E{\mathbb{E}}
     %Spazi proiettivi
     \renewcommand\P{\mathbb{P}}
+    %Conde
+    \newcommand{\dimostrazione}{$D{\!\!\!\!\!\raisebox{1.8pt}{$\rotatebox{-20}{$\textstyle\int$}$}}$\!\!}
+    \newcommand{\forallbutfinite}{\forall\!\!\;\!\! \raisebox{4.45pt}{\rotatebox{-60}{$\scriptstyle\smallfrown$}}}
+    %mathcal abbreviation
+    \let\mc\mathcal
+    %topology subsets symbols
+    \newcommand{\Int}{\operatorname{Int}}
+    \newcommand{\Est}{\operatorname{Est}}
+    \newcommand{\Fr}{\operatorname{Fr}}
+
+
+
+\newcommand{\TODO}{{\color{red}\boxed{\textbf{\sffamily\large \!TODO\!}}}}
+    
 
 %% Macros
     \newcommand{\funcdef}[5]{                                   %def funzioni f: X \to Y , x \mapsto f(x)
@@ -120,32 +134,45 @@
 %% Theorems
 \RequirePackage{amsthm}                                         %per teoremi non numerati
 \renewcommand\qedsymbol{QED}                                    %QED Symbol
-    % Definitions - Unnumbered
-
+    % Definitions - numbered
     \theoremstyle{definition}                                   %stile con testo normale
-    \newtheorem*{definition}{DEF}
+    \newtheorem{definition}{DEF}[section]
+    \newtheorem*{def*}{DEF}
+    \newtheorem{prop}[definition]{Proprietà}
+    
+    
 
     \theoremstyle{remark}                                       %stile con nome italico e testo normale
     \newtheorem*{oss}{Osservazione}
     \newtheorem*{ricorda}{Ricorda}
+    %\newcommand{\prop}{\addtocounter{definition}{1}\paragraph{Proprietà \thedefinition}}
 
-    \theoremstyle{plain}                                        %stile con testo italico
-    \newtheorem*{theorem}{Teorema}
-    \newtheorem*{law}{Legge}
-    \newtheorem*{lemma}{Lemma}
-    \newtheorem*{corollary*}{Corollario}
-    \newtheorem{prop}{Proposizione}[section]
     % Definitions - numbered
+        \theoremstyle{plain}                                        %stile con testo italico
+        \newtheorem{theorem}[definition]{Teorema}
+        \newtheorem{law}[definition]{Legge}
+        \newtheorem{lemma}[definition]{Lemma}
+        \newtheorem{proposition}[definition]{Proposizione}
+        \newtheorem{axiom}[definition]{Assioma}
+        \newtheorem{corollary}[definition]{Corollario}
+
         \newtheorem{exc}{Esercizio}[section]
-        \newtheorem{axiom}{Assioma}
-        \newtheorem{corollary}{Corollario}
-    %Definitions - shaded/boxed (requires mdframed)
+        %Definitions - shaded/boxed (requires mdframed)
         \newenvironment{shadedTheorem}%
         {\begin{mdframed}[backgroundcolor=lightgray!40, linecolor=white, innertopmargin=4pt, innerbottommargin=13pt]\begin{theorem}}%
         {\end{theorem}\end{mdframed}}
 
         \newenvironment{boxdef}{\begin{lineframe}\begin{definition}}{\end{definition}\end{lineframe}}
 
+    %Alternative proofs
+    \newenvironment{excproof}
+    {
+        \renewcommand\qedsymbol{$\square$}
+        \begin{proof}[\Large\dimostrazione]
+    }{
+        \end{proof}
+        \renewcommand\qedsymbol{QED}
+    }
 
 %plain Theorem, Lemma, Corollary, Proposition, Conjecture, Criterion, Assertion
 %definition Definition, Condition, Problem, Example, Exercise, Algorithm, Question, Axiom, Property, Assumption, Hypothesis

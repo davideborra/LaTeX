@@ -1,4 +1,4 @@
-% V. 1.1
+% V. 2.0
 % update 09/03/2023
 
 \ProvidesPackage{lambdabook}
@@ -8,6 +8,7 @@
 }
 
 \DeclareOption{book}{
+    \newcommand{\subtitle}{}
     \newcommand{\opening}[1][0.0]{
         \lhead{}
         \chead{}
@@ -21,10 +22,14 @@
                 \vspace*{\fill}
                 \vspace{0.5cm}
                 \textbf{\Huge \runtitle}\\\vspace{5mm}
-                \textsc{\Large \runauthor}
+                \textbf{\Large \subtitle}\\
+                ~\\
+                \textsc{\Large \runauthor}\\
                 \vspace{5cm}
+                
             \end{center}
             \vspace*{\fill}
+            \includegraphics[width=\textwidth]{data/img/tazza.jpg}\\
             v. #1\\
             \rule{0.8\linewidth}{0.5mm}\\
             {\footnotesize\href{mailto:davide.borra@studenti.unitn.it}{davide.borra@studenti.unitn.it} - \href{http://davideborra.github.io}{davideborra.github.io}}
@@ -33,6 +38,11 @@
         \thispagestyle{empty}
         \frontmatter
             \tableofcontents
+            \begin{center}
+                \textbf{Sommario}
+            
+                Questo documento contiene gli appunti del corso di Geometria B tenuto dal professor Ghiloni e dal professor Perotti nell'Anno Accademico 2023/2024 presso l'Università degli Studi di Trento, trascritti e rielaborati a cura di Davide Borra. Il corso contiene nozioni di Topologia Generale, Topologia Algebrica e Analisi Complessa, e i riferimenti principali sono i testi \cite{sernesi2} e \cite{occhetta}.
+            \end{center}
             \creativecommons
         \mainmatter
         \lhead{\runtitle}
@@ -58,54 +68,87 @@
 %% Text format
     \RequirePackage{enumitem}          %modifying enumerations
 
+%% Listoffigures
+    \counterwithin{figure}{section}
+    \newcommand{\figcaption}[2][]{\caption[#2 - #1]{#2}}
+
 %% Examples
     \RequirePackage[most]{tcolorbox}                %example boxes
     \tcbuselibrary{skins}
 
-    \newtcolorbox[auto counter,number within=section]{esempio}
-    {title={\textbf{Esempio \thetcbcounter.}},
-    coltitle=teal,
-    colbacktitle=white,
-    skin=bicolor,
-    colbacklower=white,
-    colback=teal!20!white,
-    colframe=teal, 
-    breakable,
-    arc=0mm, 
-    rightrule=0mm,
-    toprule=0mm,
-    titlerule=0mm,
-    }
+    \newcounter{example}
+    \counterwithin{example}{section}
 
-    \newenvironment{ex}[1][testo]{
-    \begin{esempio}
-    \textit{#1}
-    \tcblower
+    \newenvironment{ex}[1][]{
+        \addtocounter{example}{1}
+        \if#1\relax
+            \begin{tcolorbox}[title={\textbf{Esempio \theexample.}},
+                coltitle=teal,
+                colbacktitle=white,
+                colback=white,
+                colframe=teal, 
+                breakable,
+                arc=0mm, 
+                rightrule=0mm,
+                toprule=0mm,
+                titlerule=0mm,
+            ]
+        \else
+            \begin{tcolorbox}[
+            title={\textbf{Esempio \theexample.}},
+            coltitle=teal,
+            colbacktitle=white,
+            skin=bicolor,
+            colbacklower=white,
+            colback=teal!20!white,
+            colframe=teal, 
+            breakable,
+            arc=0mm, 
+            rightrule=0mm,
+            toprule=0mm,
+            titlerule=0mm,
+            ]
+            \textit{#1}
+            \tcblower
+        \fi
     }{
-    \end{esempio}
+            \end{tcolorbox}
     }
 
-    \newtcolorbox{esempio*}
-    {title={\textbf{Esempio.}},
-    coltitle=teal,
-    colbacktitle=white,
-    skin=bicolor,
-    colbacklower=white,
-    colback=teal!20!white,
-    colframe=teal, 
-    breakable,
-    arc=0mm, 
-    rightrule=0mm,
-    toprule=0mm,
-    titlerule=0mm,
-    }
 
     \newenvironment{ex*}[1][testo]{
-    \begin{esempio*}
-    \textit{#1}
-    \tcblower
+        \if#1\relax
+        \begin{tcolorbox}[title={\textbf{Esempio.}},
+            coltitle=teal,
+            colbacktitle=white,
+            colback=white,
+            colframe=teal, 
+            breakable,
+            arc=0mm, 
+            rightrule=0mm,
+            toprule=0mm,
+            titlerule=0mm,
+        ]
+        \else
+            \begin{tcolorbox}[
+            title={\textbf{Esempio.}},
+            coltitle=teal,
+            colbacktitle=white,
+            skin=bicolor,
+            colbacklower=white,
+            colback=teal!20!white,
+            colframe=teal, 
+            breakable,
+            arc=0mm, 
+            rightrule=0mm,
+            toprule=0mm,
+            titlerule=0mm,
+            ]
+            #1
+            \tcblower
+        \fi
     }{
-    \end{esempio*}
+        \end{tcolorbox}
     }
 
     \newtcolorbox{gridtcolorbox}{enhanced, arc=0mm, boxrule=0.25mm, colframe=black!20, colback=white, breakable,
