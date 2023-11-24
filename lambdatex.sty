@@ -1,5 +1,5 @@
-% V. 5.2
-% update 03/10/2023
+% V. 6.0
+% update 09/03/2023
 \ProvidesPackage{lambdatex}
 
 %% Fundamental packages
@@ -28,6 +28,7 @@
     \RequirePackage{pgfplots}                                   %Plots (required by ggb)
     \pgfplotsset{compat=1.15}                                   %Corrects compilation warning
     %\usetikzlibrary{trees}                                     %Tree schemes
+    \RequirePackage{tikz-cd}
     \RequirePackage{standalone}                                 %external matlab tikz files
     
 %% Links
@@ -41,6 +42,7 @@
     \RequirePackage{yhmath}                                     %arco con \wideparen{AB}
     \RequirePackage{cancel}                                     %cancel per barrare elementi
     \RequirePackage{esint}                                      %integrali particolari (e.g. \fint)
+    \RequirePackage{fontawesome5}                               %font awesome 
 
     \DeclareFontFamily{OT1}{pzc}{}                              %per avere mathpzc che è meglio di mathcal perchè ha le minuscole
     \DeclareFontShape{OT1}{pzc}{m}{it}%
@@ -67,9 +69,15 @@
     \let\sottosp\vartriangleleft                                %sottospazio vettoriale
     \newcommand{\gln}[2]{\mathpzc{Gl}_{#1}(#2)}                 %Gruppo lineare generale
     %arrows
+    \RequirePackage[new]{old-arrows}                                  %per \longhookrightarrow
     \newcommand\Harr{\Leftrightarrow}                           %se e solo se
     \newcommand\Larr{\Leftarrow}
     \newcommand\Rarr{\Rightarrow}
+    \newcommand{\injarr}{\hookrightarrow}                       %injection arrow
+    \newcommand{\surjarr}{\twoheadrightarrow}                   %surjection arrow
+    \newcommand{\longinjarr}{\longhookrightarrow}                       %injection arrow
+    \newcommand{\longsurjarr}{-\!\!\!-\!\!\!\twoheadrightarrow}                   %surjection arrow
+
     % Number sets
     \newcommand\N{\mathbb{N}}
     \newcommand\Z{\mathbb{Z}}
@@ -127,57 +135,13 @@
     {\end{mdframed}}
 
 %% Text boxes
-    \newenvironment{focus}[1][Focus]
-    {\begin{mdframed}[linecolor=black, innertopmargin=8pt, innerbottommargin=10pt]\textbf{\large #1.}\vspace{3pt}\\}
-    {\end{mdframed}}
+\newenvironment{focus}[1][Focus]
+{\begin{mdframed}[linecolor=black, innertopmargin=8pt, innerbottommargin=10pt]\textbf{\large #1.}\vspace{3pt}\\}
+{\end{mdframed}}
 
 %% Theorems
 \RequirePackage{amsthm}                                         %per teoremi non numerati
 \renewcommand\qedsymbol{QED}                                    %QED Symbol
-    % Definitions - numbered
-    \theoremstyle{definition}                                   %stile con testo normale
-    \newtheorem{definition}{DEF}[section]
-    \newtheorem*{def*}{DEF}
-    \newtheorem{prop}[definition]{Proprietà}
-    
-    
-
-    \theoremstyle{remark}                                       %stile con nome italico e testo normale
-    \newtheorem*{oss}{Osservazione}
-    \newtheorem*{ricorda}{Ricorda}
-    %\newcommand{\prop}{\addtocounter{definition}{1}\paragraph{Proprietà \thedefinition}}
-
-    % Definitions - numbered
-        \theoremstyle{plain}                                        %stile con testo italico
-        \newtheorem{theorem}[definition]{Teorema}
-        \newtheorem{law}[definition]{Legge}
-        \newtheorem{lemma}[definition]{Lemma}
-        \newtheorem{proposition}[definition]{Proposizione}
-        \newtheorem{axiom}[definition]{Assioma}
-        \newtheorem{corollary}[definition]{Corollario}
-
-        \newtheorem{exc}{Esercizio}[section]
-        %Definitions - shaded/boxed (requires mdframed)
-        \newenvironment{shadedTheorem}%
-        {\begin{mdframed}[backgroundcolor=lightgray!40, linecolor=white, innertopmargin=4pt, innerbottommargin=13pt]\begin{theorem}}%
-        {\end{theorem}\end{mdframed}}
-
-        \newenvironment{boxdef}{\begin{lineframe}\begin{definition}}{\end{definition}\end{lineframe}}
-
-    %Alternative proofs
-    \newenvironment{excproof}
-    {
-        \renewcommand\qedsymbol{$\square$}
-        \begin{proof}[\Large\dimostrazione]
-    }{
-        \end{proof}
-        \renewcommand\qedsymbol{QED}
-    }
-
-%plain Theorem, Lemma, Corollary, Proposition, Conjecture, Criterion, Assertion
-%definition Definition, Condition, Problem, Example, Exercise, Algorithm, Question, Axiom, Property, Assumption, Hypothesis
-%remark Remark, Note, Notation, Claim, Summary, Acknowledgment, Case, Conclusion
-
 
 %% Meme
 \newcommand{\christmaswedge}{{\displaystyle \color{teal} \bigwedge^{{\color{yellow} \star}}}{\color{red}\!\!\!\!\!\!\!\;\cdot \!\!\;\dot ~.}}
@@ -185,11 +149,12 @@
 
 %%Creative Commons
 
-\newcommand{\creativecommons}{
-    \begin{center}
-        \rule{0.9\linewidth}{0.5pt}\\
-        This work is licensed under CC BY-NC-ND 4.0. To view a copy of this license, visit \url{http://creativecommons.org/licenses/by-nc-nd/4.0/}
-        \\
-        \href{http://creativecommons.org/licenses/by-nc-nd/4.0/}{\includegraphics[height=1cm]{CreativeCommons/by-nc-nd.png}}
-    \end{center}
+\newcommand{\license}{
+\begin{center}
+    % \rule{0.9\linewidth}{0.5pt}\\
+    % This work is licensed under CC BY-NC-ND 4.0. To view a copy of this license, visit \url{http://creativecommons.org/licenses/by-nc-nd/4.0/}
+    % \\
+    % \href{http://creativecommons.org/licenses/by-nc-nd/4.0/}{\includegraphics[height=1cm]{CreativeCommons/by-nc-nd.png}}
+    © Davide Borra - \the\year
+\end{center}
 }
