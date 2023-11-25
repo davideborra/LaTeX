@@ -87,14 +87,14 @@
             </div>
             <div class="section">
                 <h1 class="sectionTitle">Lambda\(\TeX\).sty</h1>
-                <p>Questo è il mio preambolo LaTeX, costantemente aggiornato con nuove macro e funzionalità, necessario per compilare ogni mio lavoro. È compatibile con documenti con classe article, book e beamer (è necessario includere l'opzione \tt{notheorems}). Per utilizzarlo inserire <tt>\usepackage{lambdatex}</tt> nel preambolo.</p>
+                <p>Questo è il mio preambolo LaTeX, costantemente aggiornato con nuove macro e funzionalità, necessario per compilare ogni mio lavoro. È compatibile con documenti con classe article, book e beamer (nel caso desse problemi con i teoremi predefiniti di meamer, eliminare la sezione da <tt>lambdatex</tt> o attivare l'opzione <tt>notheorems</tt> di <tt>notheorems</tt>). Per utilizzarlo inserire <tt>\usepackage{lambdatex}</tt> nel preambolo.</p>
                 <div class="cardsContainer">
                     <a class="card textAlignCenter" href="lambdatex.sty" target="_blank">$$\texttt{LambdaTeX.sty}$$</a>
                 </div>
             </div>
             <div class="section">
                 <h1 class="sectionTitle">LambdaBook.sty</h1>
-                <p>Questo pacchetto, complementare al primo, serve per la compilazione dei file con classe article o book, e include le opzioni disponibili solo in quelle classi. Per utilizzarlo inserire <tt>\usepackage[article/book]{lambdabook}</tt> nel preambolo.</p>
+                <p>Questo pacchetto, complementare al primo, serve per la compilazione dei file con classe article o book, e include le opzioni disponibili solo in quelle classi. Per utilizzarlo inserire <tt>\usepackage[&lt;class &gt;, &lt;colours &gt;]{lambdabook}</tt> nel preambolo. <tt>&lt;class &gt;</tt> può essere <tt>article</tt> o <tt>book</tt>, a seconda della classe del documento; <tt>&lt;colours &gt;</tt> invece ha due opzioni: <tt>colorful</tt>, che abilita i colori negli ambienti definiti nel pacchetto, e bw che ottimizza il pacchetto per la stampa in bianco e nero. Non specificarne alcuno disabilita gli ambienti.</p>
                 <div class="cardsContainer">
                     <a class="card textAlignCenter" href="article-book/lambdabook.sty" target="_blank">$$\texttt{LambdaBook.sty}$$</a>
                 </div>
