@@ -1,5 +1,5 @@
-% V. 3.0
-% update 09/03/2023
+% V. 3.1
+% update 04/02/2024
 
 \ProvidesPackage{lambdabook}
 
@@ -8,16 +8,18 @@
 \RequirePackage{amsthm}
 
 \DeclareOption{article}{
-
+    \def\counterenvironment{section}
+    
 }
 
 \DeclareOption{book}{
+    \def\counterenvironment{chapter}
     \newcommand{\subtitle}{}
     \newcommand{\opening}[1][0.0]{
         \lhead{}
         \chead{}
         \rhead{Indice}
-        \rfoot{\runauthor}
+        \rfoot{© \the\year\ - \runauthor}
         
         \begin{titlepage}
             \newgeometry{left=3cm, right=3cm, bottom=2cm, top =3cm} 
@@ -33,9 +35,8 @@
                 
             \end{center}
             \vspace*{\fill}
-            \if#1\relax
-                v. #1\\
-            \fi
+            \includegraphics[width=\textwidth]{data/img/tazza.jpg}\\
+            v. #1\\
             \rule{0.8\linewidth}{0.5mm}\\
             {\footnotesize\href{mailto:davide.borra@studenti.unitn.it}{davide.borra@studenti.unitn.it} - \href{http://davideborra.github.io}{davideborra.github.io}}
             \restoregeometry
@@ -46,48 +47,35 @@
             \begin{center}
                 \textbf{Sommario}
             
-                [abstract]
+                Questo documento contiene gli appunti del corso di Geometria B tenuto dal professor Riccardo Ghiloni e dal professor Alessandro Perotti nell'Anno Accademico 2023/2024 presso l'Università degli Studi di Trento, trascritti e rielaborati a cura di Davide Borra. Il corso contiene nozioni di Topologia Generale, Topologia Algebrica e Analisi Complessa, e i riferimenti principali sono i testi \cite{sernesi2} e \cite{occhetta}. In bibliografia sono inoltre specificati alcuni validi testi testi utili per approfondimenti e delucidazioni, utilizzati come confronto e da cui potrei aver tratto degli esercizi. 
             \end{center}
-            \creativecommons
-
-            \begin{center}
-                \vspace{2cm}\today
-            \end{center}
+            \license
         \mainmatter
         \lhead{\runtitle}
         \chead{}
-        \rhead{\leftmark}
-        \rfoot{\runauthor}
+        \rhead{\leftmark\ - \rightmark}
+        \rfoot{© \the\year\ - \runauthor}
         }
 }
 
 \DeclareOption{colorful}{
     \theoremstyle{definition}                                   %stile con testo normale
-    \newcounter{prop}
-    \counterwithin{prop}{chapter}
-    \newtheorem{xprop}[prop]{\color{cyan}Proprietà}
+    \newcounter{enunciati}
+    \counterwithin{enunciati}{\counterenvironment}
+    \newtheorem{xprop}[enunciati]{\color{cyan}Proprietà}
+    \newtheorem{xcorollary}[enunciati]{\color{orange}Corollario}
     
     \theoremstyle{remark}                                       %stile con nome italico e testo normale
-    \newcounter{oss}[chapter]
-    \counterwithin{oss}{chapter}
-    \newtheorem{xoss}[oss]{\color{orange!70!yellow}Osservazione}
+    \newtheorem{xoss}[enunciati]{\color{orange!70!yellow}Osservazione}
     %\newcommand{\prop}{\addtocounter{definition}{1}\paragraph{Proprietà \thedefinition}}
 
     % Definitions - numbered
         \theoremstyle{plain}                                        %stile con testo italico
-            \newtheorem{theorem}{\color{red}Teorema}[chapter]
+            \newtheorem{theorem}[enunciati]{\color{red}Teorema}
             
-            \newcounter{lemma}
-            \counterwithin{lemma}{chapter}
-            \newtheorem{xlemma}[lemma]{\color{blue}Lemma}
+            \newtheorem{xlemma}[enunciati]{\color{blue}Lemma}
 
-            \newcounter{corollary}
-            \counterwithin{corollary}{chapter}
-            \newtheorem{xcorollary}[corollary]{\color{orange}Corollario}
-
-            \newcounter{proposition}[chapter]
-            \counterwithin{proposition}{chapter}
-            \newtheorem{xproposition}[proposition]{\color{yellow!30!green}Proposizione}
+            \newtheorem{xproposition}[enunciati]{\color{yellow!30!green}Proposizione}
 
         \newenvironment{lemma}{
         \begin{tcolorbox}[
@@ -177,28 +165,6 @@
         \end{tcolorbox}
     }
 
-    \newenvironment{oss}{
-        \begin{tcolorbox}[
-            colframe=orange!70!yellow, 
-            colback = white,
-            enhanced jigsaw, breakable,
-            arc=0mm, 
-            rightrule=0mm,
-            toprule=0mm,
-            titlerule=0mm,
-            bottomrule=0mm,
-            left = 1mm,
-            top = 1mm,
-            bottom = 1mm,
-            right = 1mm,
-            bottomrule at break=0mm,
-            ]
-            \begin{xoss}
-    }{
-            \end{xoss}
-        \end{tcolorbox}
-    }
-
     \newenvironment{corollary}{
         \begin{tcolorbox}[
             colframe=orange, 
@@ -221,8 +187,30 @@
         \end{tcolorbox}
     }
 
+    \newenvironment{oss}{
+        \begin{tcolorbox}[
+            colframe=orange!70!yellow, 
+            colback = white,
+            enhanced jigsaw, breakable,
+            arc=0mm, 
+            rightrule=0mm,
+            toprule=0mm,
+            titlerule=0mm,
+            bottomrule=0mm,
+            left = 1mm,
+            top = 1mm,
+            bottom = 1mm,
+            right = 1mm,
+            bottomrule at break=0mm,
+            ]
+            \begin{xoss}
+    }{
+            \end{xoss}
+        \end{tcolorbox}
+    }
+
     \newcounter{example}
-    \counterwithin{example}{section}
+    \counterwithin{example}{\counterenvironment}
 
     \newenvironment{ex}[1][]{
         \addtocounter{example}{1}
@@ -307,31 +295,23 @@
 
 \DeclareOption{bw}{
     \theoremstyle{definition}                                   %stile con testo normale
-    \newcounter{prop}
-    \counterwithin{prop}{chapter}
-    \newtheorem{xprop}[prop]{Proprietà}
+    \newcounter{enunciati}
+    \counterwithin{enunciati}{\counterenvironment}
+    \newtheorem{xprop}[enunciati]{Proprietà}
+    \newtheorem{xcorollary}[enunciati]{Corollario}
     
     \theoremstyle{remark}                                       %stile con nome italico e testo normale
-    \newcounter{oss}[chapter]
-    \counterwithin{oss}{chapter}
-    \newtheorem{xoss}[oss]{Osservazione}
+    \newtheorem{xoss}[enunciati]{Osservazione}
     %\newcommand{\prop}{\addtocounter{definition}{1}\paragraph{Proprietà \thedefinition}}
 
     % Definitions - numbered
         \theoremstyle{plain}                                        %stile con testo italico
-            \newtheorem{theorem}{Teorema}[chapter]
+            \newtheorem{theorem}[enunciati]{Teorema}
 
-            \newcounter{lemma}
-            \counterwithin{lemma}{chapter}
-            \newtheorem{xlemma}[lemma]{Lemma}
+            \newtheorem{xlemma}[enunciati]{Lemma}
 
-            \newcounter{proposition}[chapter]
-            \counterwithin{proposition}{chapter}
-            \newtheorem{xproposition}[proposition]{Proposizione}
+            \newtheorem{xproposition}[enunciati]{Proposizione}
 
-            \newcounter{corollary}
-            \counterwithin{corollary}{chapter}
-            \newtheorem{xcorollary}[corollary]{Corollario}
         \newenvironment{lemma}{
         \begin{tcolorbox}[
             colframe=black, 
@@ -572,7 +552,7 @@
 %% Definitions-theorems-examples static
 
     \theoremstyle{definition}                                   %stile con testo normale
-    \newtheorem{definition}{DEF}[chapter]
+    \newtheorem{definition}[enunciati]{DEF}
     \newtheorem*{def*}{DEF}
 
     \theoremstyle{remark}
@@ -582,16 +562,16 @@
     \newenvironment{excproof}
     {
         \renewcommand\qedsymbol{$\square$}
-        \begin{proof}[Soluzione]
+        \begin{proof}%[\Large\dimostrazione]
     }{
         \end{proof}
         \renewcommand\qedsymbol{QED}
     }
 
     \theoremstyle{plain}
-    \newtheorem{exc}{Esercizio}[chapter]
-    \newtheorem{axiom}{Assioma}[chapter]
-    \newtheorem{law}{Legge}[chapter]
+    \newtheorem{exc}{Esercizio}[\counterenvironment]
+    \newtheorem{axiom}{Assioma}[\counterenvironment]
+    \newtheorem{law}{Legge}[\counterenvironment]
 
     \newenvironment{boxdef}{\begin{lineframe}\begin{definition}}{\end{definition}\end{lineframe}}
 

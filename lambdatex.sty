@@ -1,4 +1,4 @@
-% V. 6.0
+% V. 5.1
 % update 09/03/2023
 \ProvidesPackage{lambdatex}
 
@@ -17,7 +17,7 @@
     \RequirePackage{longtable}                                  %multiple page tables
     \RequirePackage{multirow}                                   %colspan and rowspan
 
-%% Excercizes
+%% Execercizes
     \usepackage{tasks}
     \usepackage{exsheets}
 
@@ -97,10 +97,14 @@
     \newcommand{\forallbut}{\operatorname{\forall\!\!\;\!\! \raisebox{4.45pt}{\rotatebox{-60}{$\scriptstyle\smallfrown$}}\!\!}}
     %mathcal abbreviation
     \let\mc\mathcal
+    \let\bb\mathbb
     %topology subsets symbols
     \newcommand{\Int}{\operatorname{Int}}
     \newcommand{\Est}{\operatorname{Est}}
     \newcommand{\Fr}{\operatorname{Fr}}
+    % Underset commands
+    \newcommand{\underin}[2]{\underset{\substack{\rotatebox{270}{$\scriptstyle\in$}\\{#2}}}{{#1}}}
+    \newcommand{\underni}[2]{\underset{\substack{\rotatebox{90}{$\scriptstyle\in$}\\{#2}}}{{#1}}}
 
 
 
@@ -147,14 +151,14 @@
 \newcommand{\christmaswedge}{{\displaystyle \color{teal} \bigwedge^{{\color{yellow} \star}}}{\color{red}\!\!\!\!\!\!\!\;\cdot \!\!\;\dot ~.}}
 \newcommand\amongus{{{~_{~_{~_{\displaystyle~_{~_\sqcup\!\!\!\!~^\sqcap\!\!\!\!~_\sqcup}}}}\!\!\!\!\!\!\!\!\!\!\!\!{~^{~_\supset}}\!\!\!\!\!\bigcap\,\!\!{\scriptstyle]}}}}
 
-%%Creative Commons
+%%License
 
 \newcommand{\license}{
-\begin{center}
-    % \rule{0.9\linewidth}{0.5pt}\\
-    % This work is licensed under CC BY-NC-ND 4.0. To view a copy of this license, visit \url{http://creativecommons.org/licenses/by-nc-nd/4.0/}
-    % \\
-    % \href{http://creativecommons.org/licenses/by-nc-nd/4.0/}{\includegraphics[height=1cm]{CreativeCommons/by-nc-nd.png}}
-    © Davide Borra - \the\year
-\end{center}
+    \begin{center}
+        % \rule{0.9\linewidth}{0.5pt}\\
+        % This work is licensed under CC BY-NC-ND 4.0. To view a copy of this license, visit \url{http://creativecommons.org/licenses/by-nc-nd/4.0/}
+        % \\
+        % \href{http://creativecommons.org/licenses/by-nc-nd/4.0/}{\includegraphics[height=1cm]{CreativeCommons/by-nc-nd.png}}
+        © \the\year\ - Davide Borra
+    \end{center}
 }
