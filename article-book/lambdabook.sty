@@ -1,5 +1,5 @@
-% V. 3.1
-% update 04/02/2024
+% V. 4.0
+% update 20/03/2024
 
 \ProvidesPackage{lambdabook}
 
@@ -7,9 +7,10 @@
     \tcbuselibrary{skins}
 \RequirePackage{amsthm}
 
+\def\counterenvironment{section} %è importante definirlo anche prima con un valore placeholder (section così funziona ovunque) altrimenti dà errore. 
+
 \DeclareOption{article}{
     \def\counterenvironment{section}
-    
 }
 
 \DeclareOption{book}{
@@ -59,473 +60,256 @@
 }
 
 \DeclareOption{colorful}{
-    \theoremstyle{definition}                                   %stile con testo normale
-    \newcounter{enunciati}
-    \counterwithin{enunciati}{\counterenvironment}
-    \newtheorem{xprop}[enunciati]{\color{cyan}Proprietà}
-    \newtheorem{xcorollary}[enunciati]{\color{orange}Corollario}
-    
-    \theoremstyle{remark}                                       %stile con nome italico e testo normale
-    \newtheorem{xoss}[enunciati]{\color{orange!70!yellow}Osservazione}
-    %\newcommand{\prop}{\addtocounter{definition}{1}\paragraph{Proprietà \thedefinition}}
-
-    % Definitions - numbered
-        \theoremstyle{plain}                                        %stile con testo italico
-            \newtheorem{theorem}[enunciati]{\color{red}Teorema}
-            
-            \newtheorem{xlemma}[enunciati]{\color{blue}Lemma}
-
-            \newtheorem{xproposition}[enunciati]{\color{yellow!30!green}Proposizione}
-
-        \newenvironment{lemma}{
-        \begin{tcolorbox}[
-            colframe=blue, 
-            colback = white,
-            enhanced jigsaw, breakable,
-            arc=0mm, 
-            rightrule=0mm,
-            toprule=0mm,
-            titlerule=0mm,
-            bottomrule=0mm,
-            left = 1mm,
-            top = 1mm,
-            bottom = 1mm,
-            right = 1mm,
-            bottomrule at break=0mm
-            ]
-            \begin{xlemma}
-    }{
-            \end{xlemma}
-        \end{tcolorbox}
-    }
-
-    \newenvironment{proposition}{
-        \begin{tcolorbox}[
-            colframe=yellow!30!green, 
-            colback = white,
-            enhanced jigsaw, breakable,
-            arc=0mm, 
-            rightrule=0mm,
-            toprule=0mm,
-            titlerule=0mm,
-            bottomrule=0mm,
-            left = 1mm,
-            top = 1mm,
-            bottom = 1mm,
-            right = 1mm,
-            bottomrule at break=0mm,
-            ]
-            \begin{xproposition}
-    }{
-            \end{xproposition}
-        \end{tcolorbox}
-    }
-
-    \newenvironment{prop}{
-        \begin{tcolorbox}[
-            colframe=cyan, 
-            colback = white,
-            enhanced jigsaw, breakable,
-            arc=0mm, 
-            rightrule=0mm,
-            toprule=0mm,
-            titlerule=0mm,
-            bottomrule=0mm,
-            left = 1mm,
-            top = 1mm,
-            bottom = 1mm,
-            right = 1mm,
-            bottomrule at break=0mm,
-            ]
-            \begin{xprop}
-    }{
-            \end{xprop}
-        \end{tcolorbox}
-    }
-
-    \newenvironment{shadedTheorem}{
-        \begin{tcolorbox}[
-            colframe = red, 
-            colback = red!10,
-            enhanced jigsaw, breakable,
-            arc=0mm, 
-            rightrule=0mm,
-            toprule=0mm,
-            titlerule=0mm,
-            bottomrule=0mm,
-            left = 1mm,
-            top = 1mm,
-            bottom = 1mm,
-            right = 1mm,
-            bottomrule at break=0mm,
-            ]
-            \begin{theorem}
-    }{
-            \end{theorem}
-        \end{tcolorbox}
-    }
-
-    \newenvironment{corollary}{
-        \begin{tcolorbox}[
-            colframe=orange, 
-            colback = white,
-            enhanced jigsaw, breakable,
-            arc=0mm, 
-            rightrule=0mm,
-            toprule=0mm,
-            titlerule=0mm,
-            bottomrule=0mm,
-            left = 1mm,
-            top = 1mm,
-            bottom = 1mm,
-            right = 1mm,
-            bottomrule at break=0mm,
-            ]
-            \begin{xcorollary}
-    }{
-            \end{xcorollary}
-        \end{tcolorbox}
-    }
-
-    \newenvironment{oss}{
-        \begin{tcolorbox}[
-            colframe=orange!70!yellow, 
-            colback = white,
-            enhanced jigsaw, breakable,
-            arc=0mm, 
-            rightrule=0mm,
-            toprule=0mm,
-            titlerule=0mm,
-            bottomrule=0mm,
-            left = 1mm,
-            top = 1mm,
-            bottom = 1mm,
-            right = 1mm,
-            bottomrule at break=0mm,
-            ]
-            \begin{xoss}
-    }{
-            \end{xoss}
-        \end{tcolorbox}
-    }
-
-    \newcounter{example}
-    \counterwithin{example}{\counterenvironment}
-
-    \newenvironment{ex}[1][]{
-        \addtocounter{example}{1}
-        \if#1\relax
-            \begin{tcolorbox}[
-            title={\textbf{Esempio \theexample.}},
-            coltitle=teal,
-            colbacktitle=white,
-            colback=white,
-            colframe=teal, 
-            enhanced jigsaw, breakable,
-            arc=0mm, 
-            rightrule=0mm,
-            toprule=0mm,
-            titlerule=0mm,
-            top = 0mm,
-            bottomrule at break=0mm,subtitle style={boxrule=0pt,
-            colback=teal!20!white, colupper=black} 
-            ]
-        \else
-            \begin{tcolorbox}[
-            title={\textbf{Esempio \theexample} (#1)\textbf{.}},
-            coltitle=teal,
-            colbacktitle=white,
-            colback=white,
-            colframe=teal, 
-            enhanced jigsaw, breakable,
-            arc=0mm, 
-            rightrule=0mm,
-            toprule=0mm,
-            titlerule=0mm,
-            top = 0mm,
-            bottomrule at break=0mm,
-            subtitle style={boxrule=0pt,
-            colback=teal!20!white, colupper=black}
-            ]
-        \fi
-    }{
-            \end{tcolorbox}
-    }
-
-    \newenvironment{ex*}[1][]{
-        \addtocounter{example}{1}
-        \if#1\relax
-            \begin{tcolorbox}[
-            title={\textbf{Esempio}},
-            coltitle=teal,
-            colbacktitle=white,
-            colback=white,
-            colframe=teal, 
-            enhanced jigsaw, breakable,
-            arc=0mm, 
-            rightrule=0mm,
-            toprule=0mm,
-            titlerule=0mm,
-            top = 0mm,
-            bottomrule at break=0mm,subtitle style={boxrule=0pt,
-            colback=teal!20!white, colupper=black} 
-            ]
-        \else
-            \begin{tcolorbox}[
-            title={\textbf{Esempio} (#1)\textbf{.}},
-            coltitle=teal,
-            colbacktitle=white,
-            colback=white,
-            colframe=teal, 
-            enhanced jigsaw, breakable,
-            arc=0mm, 
-            rightrule=0mm,
-            toprule=0mm,
-            titlerule=0mm,
-            top = 0mm,
-            bottomrule at break=0mm,
-            subtitle style={boxrule=0pt,
-            colback=teal!20!white, colupper=black}
-            ]
-        \fi
-    }{
-            \end{tcolorbox}
-    }
+    \colorlet{propositioncolor}{yellow!30!green}
+    \colorlet{theoremcolor}{red}
+    \colorlet{lemmacolor}{blue}
+    \colorlet{corollarycolor}{orange}
+    \colorlet{osscolor}{orange!70!yellow}
+    \colorlet{propcolor}{cyan}
+    \colorlet{examplecolor}{teal}
 }
 
 \DeclareOption{bw}{
-    \theoremstyle{definition}                                   %stile con testo normale
-    \newcounter{enunciati}
-    \counterwithin{enunciati}{\counterenvironment}
-    \newtheorem{xprop}[enunciati]{Proprietà}
-    \newtheorem{xcorollary}[enunciati]{Corollario}
-    
-    \theoremstyle{remark}                                       %stile con nome italico e testo normale
-    \newtheorem{xoss}[enunciati]{Osservazione}
-    %\newcommand{\prop}{\addtocounter{definition}{1}\paragraph{Proprietà \thedefinition}}
+    \colorlet{propositioncolor}{black}
+    \colorlet{theoremcolor}{black}
+    \colorlet{lemmacolor}{black}
+    \colorlet{corollarycolor}{black}
+    \colorlet{osscolor}{black}
+    \colorlet{propcolor}{black}
+    \colorlet{examplecolor}{black}
+}
 
-    % Definitions - numbered
-        \theoremstyle{plain}                                        %stile con testo italico
-            \newtheorem{theorem}[enunciati]{Teorema}
+\theoremstyle{definition}                                   %stile con testo normale
+\newcounter{enunciati}
+\counterwithin{enunciati}{\counterenvironment}
+\newtheorem{xprop}[enunciati]{\color{propcolor}Proprietà}
+\newtheorem{xcorollary}[enunciati]{\color{corollarycolor}Corollario}
 
-            \newtheorem{xlemma}[enunciati]{Lemma}
+\theoremstyle{remark}                                       %stile con nome italico e testo normale
+\newtheorem{xoss}[enunciati]{\color{osscolor}Osservazione}
+%\newcommand{\prop}{\addtocounter{definition}{1}\paragraph{Proprietà \thedefinition}}
 
-            \newtheorem{xproposition}[enunciati]{Proposizione}
+% Definitions - numbered
+    \theoremstyle{plain}                                        %stile con testo italico
+        \newtheorem{theorem}[enunciati]{\color{theoremcolor}Teorema}
+        
+        \newtheorem{xlemma}[enunciati]{\color{lemmacolor}Lemma}
 
-        \newenvironment{lemma}{
+        \newtheorem{xproposition}[enunciati]{\color{propositioncolor}Proposizione}
+
+    \newenvironment{lemma}{
+    \begin{tcolorbox}[
+        colframe=lemmacolor, 
+        colback = white,
+        enhanced jigsaw, breakable,
+        arc=0mm, 
+        rightrule=0mm,
+        toprule=0mm,
+        titlerule=0mm,
+        bottomrule=0mm,
+        left = 1mm,
+        top = 1mm,
+        bottom = 1mm,
+        right = 1mm,
+        bottomrule at break=0mm
+        ]
+        \begin{xlemma}
+}{
+        \end{xlemma}
+    \end{tcolorbox}
+}
+
+\newenvironment{proposition}{
+    \begin{tcolorbox}[
+        colframe=propositioncolor, 
+        colback = white,
+        enhanced jigsaw, breakable,
+        arc=0mm, 
+        rightrule=0mm,
+        toprule=0mm,
+        titlerule=0mm,
+        bottomrule=0mm,
+        left = 1mm,
+        top = 1mm,
+        bottom = 1mm,
+        right = 1mm,
+        bottomrule at break=0mm,
+        ]
+        \begin{xproposition}
+}{
+        \end{xproposition}
+    \end{tcolorbox}
+}
+
+\newenvironment{prop}{
+    \begin{tcolorbox}[
+        colframe=propcolor, 
+        colback = white,
+        enhanced jigsaw, breakable,
+        arc=0mm, 
+        rightrule=0mm,
+        toprule=0mm,
+        titlerule=0mm,
+        bottomrule=0mm,
+        left = 1mm,
+        top = 1mm,
+        bottom = 1mm,
+        right = 1mm,
+        bottomrule at break=0mm,
+        ]
+        \begin{xprop}
+}{
+        \end{xprop}
+    \end{tcolorbox}
+}
+
+\newenvironment{shadedTheorem}{
+    \begin{tcolorbox}[
+        colframe = theoremcolor, 
+        colback = theoremcolor!10,
+        enhanced jigsaw, breakable,
+        arc=0mm, 
+        rightrule=0mm,
+        toprule=0mm,
+        titlerule=0mm,
+        bottomrule=0mm,
+        left = 1mm,
+        top = 1mm,
+        bottom = 1mm,
+        right = 1mm,
+        bottomrule at break=0mm,
+        ]
+        \begin{theorem}
+}{
+        \end{theorem}
+    \end{tcolorbox}
+}
+
+\newenvironment{corollary}{
+    \begin{tcolorbox}[
+        colframe=corollarycolor, 
+        colback = white,
+        enhanced jigsaw, breakable,
+        arc=0mm, 
+        rightrule=0mm,
+        toprule=0mm,
+        titlerule=0mm,
+        bottomrule=0mm,
+        left = 1mm,
+        top = 1mm,
+        bottom = 1mm,
+        right = 1mm,
+        bottomrule at break=0mm,
+        ]
+        \begin{xcorollary}
+}{
+        \end{xcorollary}
+    \end{tcolorbox}
+}
+
+\newenvironment{oss}{
+    \begin{tcolorbox}[
+        colframe=osscolor, 
+        colback = white,
+        enhanced jigsaw, breakable,
+        arc=0mm, 
+        rightrule=0mm,
+        toprule=0mm,
+        titlerule=0mm,
+        bottomrule=0mm,
+        left = 1mm,
+        top = 1mm,
+        bottom = 1mm,
+        right = 1mm,
+        bottomrule at break=0mm,
+        ]
+        \begin{xoss}
+}{
+        \end{xoss}
+    \end{tcolorbox}
+}
+
+\newcounter{example}
+\counterwithin{example}{\counterenvironment}
+
+\newenvironment{ex}[1][]{
+    \addtocounter{example}{1}
+    \if#1\relax
         \begin{tcolorbox}[
-            colframe=black, 
-            colback = white,
-            enhanced jigsaw, breakable,
-            arc=0mm, 
-            rightrule=0mm,
-            toprule=0mm,
-            titlerule=0mm,
-            bottomrule=0mm,
-            left = 1mm,
-            top = 1mm,
-            bottom = 1mm,
-            right = 1mm,
-            bottomrule at break=0mm
-            ]
-            \begin{xlemma}
-    }{
-            \end{xlemma}
-        \end{tcolorbox}
-    }
-
-    \newenvironment{proposition}{
+        title={\textbf{Esempio \theexample.}},
+        coltitle=examplecolor,
+        colbacktitle=white,
+        colback=white,
+        colframe=examplecolor, 
+        enhanced jigsaw, breakable,
+        arc=0mm, 
+        rightrule=0mm,
+        toprule=0mm,
+        titlerule=0mm,
+        top = 0mm,
+        bottomrule at break=0mm,subtitle style={boxrule=0pt,
+        colback=examplecolor!20!white, colupper=black} 
+        ]
+    \else
         \begin{tcolorbox}[
-            colframe=black, 
-            colback = white,
-            enhanced jigsaw, breakable,
-            arc=0mm, 
-            rightrule=0mm,
-            toprule=0mm,
-            titlerule=0mm,
-            bottomrule=0mm,
-            left = 1mm,
-            top = 1mm,
-            bottom = 1mm,
-            right = 1mm,
-            bottomrule at break=0mm,
-            ]
-            \begin{xproposition}
-    }{
-            \end{xproposition}
+        title={\textbf{Esempio \theexample} (#1)\textbf{.}},
+        coltitle=examplecolor,
+        colbacktitle=white,
+        colback=white,
+        colframe=examplecolor, 
+        enhanced jigsaw, breakable,
+        arc=0mm, 
+        rightrule=0mm,
+        toprule=0mm,
+        titlerule=0mm,
+        top = 0mm,
+        bottomrule at break=0mm,
+        subtitle style={boxrule=0pt,
+        colback=examplecolor!20!white, colupper=black}
+        ]
+    \fi
+}{
         \end{tcolorbox}
-    }
+}
 
-    \newenvironment{prop}{
+\newenvironment{ex*}[1][]{
+    \addtocounter{example}{1}
+    \if#1\relax
         \begin{tcolorbox}[
-            colframe=black, 
-            colback = white,
-            enhanced jigsaw, breakable,
-            arc=0mm, 
-            rightrule=0mm,
-            toprule=0mm,
-            titlerule=0mm,
-            bottomrule=0mm,
-            left = 1mm,
-            top = 1mm,
-            bottom = 1mm,
-            right = 1mm,
-            bottomrule at break=0mm,
-            ]
-            \begin{xprop}
-    }{
-            \end{xprop}
-        \end{tcolorbox}
-    }
-
-    \newenvironment{shadedTheorem}{
+        title={\textbf{Esempio}},
+        coltitle=examplecolor,
+        colbacktitle=white,
+        colback=white,
+        colframe=examplecolor, 
+        enhanced jigsaw, breakable,
+        arc=0mm, 
+        rightrule=0mm,
+        toprule=0mm,
+        titlerule=0mm,
+        top = 0mm,
+        bottomrule at break=0mm,subtitle style={boxrule=0pt,
+        colback=examplecolor!20!white, colupper=black} 
+        ]
+    \else
         \begin{tcolorbox}[
-            colframe = black, 
-            colback = lightgray!40,
-            enhanced jigsaw, breakable,
-            arc=0mm, 
-            rightrule=0mm,
-            toprule=0mm,
-            titlerule=0mm,
-            bottomrule=0mm,
-            left = 1mm,
-            top = 1mm,
-            bottom = 1mm,
-            right = 1mm,
-            bottomrule at break=0mm,
-            ]
-            \begin{theorem}
-    }{
-            \end{theorem}
+        title={\textbf{Esempio} (#1)\textbf{.}},
+        coltitle=examplecolor,
+        colbacktitle=white,
+        colback=white,
+        colframe=examplecolor, 
+        enhanced jigsaw, breakable,
+        arc=0mm, 
+        rightrule=0mm,
+        toprule=0mm,
+        titlerule=0mm,
+        top = 0mm,
+        bottomrule at break=0mm,
+        subtitle style={boxrule=0pt,
+        colback=examplecolor!20!white, colupper=black}
+        ]
+    \fi
+}{
         \end{tcolorbox}
-    }
-
-    \newenvironment{oss}{
-        \begin{tcolorbox}[
-            colframe=black, 
-            colback = white,
-            enhanced jigsaw, breakable,
-            arc=0mm, 
-            rightrule=0mm,
-            toprule=0mm,
-            titlerule=0mm,
-            bottomrule=0mm,
-            left = 1mm,
-            top = 1mm,
-            bottom = 1mm,
-            right = 1mm,
-            bottomrule at break=0mm,
-            ]
-            \begin{xoss}
-    }{
-            \end{xoss}
-        \end{tcolorbox}
-    }
-
-    \newenvironment{corollary}{
-        \begin{tcolorbox}[
-            colframe=black, 
-            colback = white,
-            enhanced jigsaw, breakable,
-            arc=0mm, 
-            rightrule=0mm,
-            toprule=0mm,
-            titlerule=0mm,
-            bottomrule=0mm,
-            left = 1mm,
-            top = 1mm,
-            bottom = 1mm,
-            right = 1mm,
-            bottomrule at break=0mm,
-            ]
-            \begin{xcorollary}
-    }{
-            \end{xcorollary}
-        \end{tcolorbox}
-    }
-
-    \newcounter{example}
-    \counterwithin{example}{section}
-
-    \newenvironment{ex}[1][]{
-        \addtocounter{example}{1}
-        \if#1\relax
-            \begin{tcolorbox}[
-            title={\textbf{Esempio \theexample.}},
-            coltitle=black,
-            colbacktitle=white,
-            colback=white,
-            colframe=black, 
-            enhanced jigsaw, breakable,
-            arc=0mm, 
-            rightrule=0mm,
-            toprule=0mm,
-            titlerule=0mm,
-            top = 0mm,
-            bottomrule at break=0mm,subtitle style={boxrule=0pt,
-            colback=lightgray!40, colupper=black} 
-            ]
-        \else
-            \begin{tcolorbox}[
-            title={\textbf{Esempio \theexample} (#1)\textbf{.}},
-            coltitle=black,
-            colbacktitle=white,
-            colback=white,
-            colframe=black, 
-            enhanced jigsaw, breakable,
-            arc=0mm, 
-            rightrule=0mm,
-            toprule=0mm,
-            titlerule=0mm,
-            top = 0mm,
-            bottomrule at break=0mm,
-            subtitle style={boxrule=0pt,
-            colback=lightgray!40, colupper=black}
-            ]
-        \fi
-    }{
-            \end{tcolorbox}
-    }
-
-    \newenvironment{ex*}[1][]{
-        \addtocounter{example}{1}
-        \if#1\relax
-            \begin{tcolorbox}[
-            title={\textbf{Esempio}},
-            coltitle=teal,
-            colbacktitle=white,
-            colback=white,
-            colframe=teal, 
-            enhanced jigsaw, breakable,
-            arc=0mm, 
-            rightrule=0mm,
-            toprule=0mm,
-            titlerule=0mm,
-            top = 0mm,
-            bottomrule at break=0mm,subtitle style={boxrule=0pt,
-            colback=teal!20!white, colupper=black} 
-            ]
-        \else
-            \begin{tcolorbox}[
-            title={\textbf{Esempio} (#1)\textbf{.}},
-            coltitle=teal,
-            colbacktitle=white,
-            colback=white,
-            colframe=teal, 
-            enhanced jigsaw, breakable,
-            arc=0mm, 
-            rightrule=0mm,
-            toprule=0mm,
-            titlerule=0mm,
-            top = 0mm,
-            bottomrule at break=0mm,
-            subtitle style={boxrule=0pt,
-            colback=teal!20!white, colupper=black}
-            ]
-        \fi
-    }{
-            \end{tcolorbox}
-    }
 }
 
 
