@@ -1,16 +1,22 @@
-% V. 4.0
-% update 20/03/2024
+% V. 4.1
+% update 25/03/2024
 
 \ProvidesPackage{lambdabook}
 
-\RequirePackage[most]{tcolorbox}                %example boxes
+%% Fundamental Packages
+\RequirePackage[most]{tcolorbox}                %text boxes
     \tcbuselibrary{skins}
 \RequirePackage{amsthm}
+\RequirePackage[a4paper, portrait, margin=2cm]{geometry}    %paper shape
 
 \def\counterenvironment{section} %è importante definirlo anche prima con un valore placeholder (section così funziona ovunque) altrimenti dà errore. 
 
 \DeclareOption{article}{
     \def\counterenvironment{section}
+}
+
+\DeclareOption{print}{
+    \newgeometry{a4paper, portrait, margin=2cm, inner = 2.5 cm, outer = 1.5cm}
 }
 
 \DeclareOption{book}{
@@ -20,7 +26,7 @@
         \lhead{}
         \chead{}
         \rhead{Indice}
-        \rfoot{© \the\year\ - \runauthor}
+        \rfoot{\runauthor}
         
         \begin{titlepage}
             \newgeometry{left=3cm, right=3cm, bottom=2cm, top =3cm} 
@@ -52,13 +58,16 @@
             \end{center}
             \license
         \mainmatter
-        \lhead{\runtitle}
         \chead{}
-        \rhead{\leftmark\ - \rightmark}
-        \rfoot{© \the\year\ - \runauthor}
+        \rhead{\rightmark}
+        \rfoot{\runauthor}
+        \fancyhead[RO]{\nouppercase{\leftmark}}
+        \fancyhead[LE]{\nouppercase{\rightmark}}
+        \fancyhead[RE]{\runtitle}
+        \fancyhead[LO]{\runtitle}
         }
 }
-
+        
 \DeclareOption{colorful}{
     \colorlet{propositioncolor}{yellow!30!green}
     \colorlet{theoremcolor}{red}
