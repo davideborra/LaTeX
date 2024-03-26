@@ -1,5 +1,5 @@
-% V. 4.1
-% update 25/03/2024
+% V. 4.2
+% update 26/03/2024
 
 \ProvidesPackage{lambdabook}
 
@@ -87,6 +87,13 @@
     \colorlet{propcolor}{black}
     \colorlet{examplecolor}{black}
 }
+
+%% Fallback
+\DeclareOption*{
+    \ClassWarning{lambdabook}{Unknown option '\CurrentOption'}
+}
+
+\ProcessOptions\relax
 
 \theoremstyle{definition}                                   %stile con testo normale
 \newcounter{enunciati}
@@ -321,13 +328,6 @@
         \end{tcolorbox}
 }
 
-
-%% Fallback
-\DeclareOption*{
-    \ClassWarning{lambdabook}{Unknown option '\CurrentOption'}
-    }
-
-\ProcessOptions\relax
 
 %% Fundamental Packages
     \RequirePackage[a4paper, portrait, margin=2cm]{geometry}    %paper shape
