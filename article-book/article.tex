@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[twoside]{article}
 \usepackage[article]{lambdabook}
 \usepackage{lambdatex}
 
@@ -45,11 +45,12 @@
     \creativecommons
     \newpage
     
-    
-    \lhead{\runtitle}\
     \chead{}
-    \rhead{\rightmark}
     \rfoot{\runauthor}
+    \fancyhead[RO]{\nouppercase{\rightmark}}
+    \fancyhead[LE]{\nouppercase{\rightmark}}
+    \fancyhead[RE]{\runtitle}
+    \fancyhead[LO]{\runtitle}
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     \section{Pippo}
