@@ -1,5 +1,5 @@
-% V. 4.2
-% update 26/03/2024
+% V. 4.3
+% update 13/04/2024
 
 \ProvidesPackage{lambdabook}
 
@@ -54,7 +54,7 @@
             \begin{center}
                 \textbf{Sommario}
             
-                Questo documento contiene gli appunti del corso di Geometria B tenuto dal professor Riccardo Ghiloni e dal professor Alessandro Perotti nell'Anno Accademico 2023/2024 presso l'Università degli Studi di Trento, trascritti e rielaborati a cura di Davide Borra. Il corso contiene nozioni di Topologia Generale, Topologia Algebrica e Analisi Complessa, e i riferimenti principali sono i testi \cite{sernesi2} e \cite{occhetta}. In bibliografia sono inoltre specificati alcuni validi testi testi utili per approfondimenti e delucidazioni, utilizzati come confronto e da cui potrei aver tratto degli esercizi. 
+                Questo documento contiene gli appunti del corso di Geometria B tenuto dal professor Riccardo Ghiloni e dal professor Alessandro Perotti nell'Anno Accademico 2023/2024 presso l'Università degli Studi di Trento, trascritti e rielaborati a cura di Davide Borra. Il corso contiene nozioni di Topologia Generale, Topologia Algebrica e Analisi Complessa, e i riferimenti principali sono i testi \cite{sernesi2} e \cite{occhetta}. In bibliografia sono inoltre specificati alcuni validi testi testi utili per approfondimenti e delucidazioni, utilizzati come confronto e da cui provengono alcuni esercizi. Le parti indicate con $\curvearrowright$ sono approfondimenti personali, non trattati a lezione, pertanto non sono necessari ai fini dell'esame. \\
             \end{center}
             \license
         \mainmatter
@@ -94,6 +94,10 @@
 }
 
 \ProcessOptions\relax
+
+\usepackage{footnote}
+\BeforeBeginEnvironment{tcolorbox}{\savenotes}
+\AfterEndEnvironment{tcolorbox}{\spewnotes}
 
 \theoremstyle{definition}                                   %stile con testo normale
 \newcounter{enunciati}
@@ -352,10 +356,10 @@
     \newtheorem*{ricorda}{Ricorda}
 
     %Alternative proofs
-    \newenvironment{excproof}
+    \newenvironment{excproof}[1][Dimostrazione]
     {
         \renewcommand\qedsymbol{$\square$}
-        \begin{proof}%[\Large\dimostrazione]
+        \begin{proof}[#1]%[\Large\dimostrazione]
     }{
         \end{proof}
         \renewcommand\qedsymbol{QED}
