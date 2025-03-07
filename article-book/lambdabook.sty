@@ -1,72 +1,27 @@
-% V. 4.3
-% update 13/04/2024
-
+% V. 5.0
+% update 07/03/2025
 \ProvidesPackage{lambdabook}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% Fundamental Packages
-\RequirePackage[most]{tcolorbox}                %text boxes
-    \tcbuselibrary{skins}
-\RequirePackage{amsthm}
-
-\def\counterenvironment{section} %è importante definirlo anche prima con un valore placeholder (section così funziona ovunque) altrimenti dà errore. 
-
-\DeclareOption{article}{
-    \def\counterenvironment{section}
-}
-
-\DeclareOption{print}{
-    \newgeometry{a4paper, portrait, margin=2cm, inner = 2.5 cm, outer = 1.5cm}
-}
-
-\DeclareOption{book}{
-    \def\counterenvironment{chapter}
-    \newcommand{\subtitle}{}
-    \newcommand{\opening}[1][0.0]{
-        \lhead{}
-        \chead{}
-        \rhead{Indice}
-        \rfoot{\runauthor}
+%% Package Declarations
+    \RequirePackage{lambdatex}
+    \RequirePackage[a4paper, portrait, margin=2cm]{geometry}    %paper shape
+    \RequirePackage[most]{tcolorbox}
+        \tcbuselibrary{skins}
+    % Header
+    \RequirePackage{fancyhdr}
+        \pagestyle{fancy}
+    % Text format
+    \RequirePackage{enumitem}          %modifying enumerations
+    % Footnotes
+    \usepackage{footnote}
+        \BeforeBeginEnvironment{tcolorbox}{\savenotes}
+        \AfterEndEnvironment{tcolorbox}{\spewnotes}
         
-        \begin{titlepage}
-            \newgeometry{left=3cm, right=3cm, bottom=2cm, top =3cm} 
-            \pagestyle{empty}
-            \begin{center}
-                \vspace*{\fill}
-                \vspace{0.5cm}
-                \textbf{\Huge \runtitle}\\\vspace{5mm}
-                \textbf{\Large \subtitle}\\
-                ~\\
-                \textsc{\Large \runauthor}\\
-                \vspace{5cm}
-                
-            \end{center}
-            \vspace*{\fill}
-            \includegraphics[width=\textwidth]{data/img/tazza.jpg}\\
-            v. #1\\
-            \rule{0.8\linewidth}{0.5mm}\\
-            {\footnotesize\href{mailto:davide.borra@studenti.unitn.it}{davide.borra@studenti.unitn.it} - \href{http://davideborra.github.io}{davideborra.github.io}}
-            \restoregeometry
-        \end{titlepage}
-        \thispagestyle{empty}
-        \frontmatter
-            \tableofcontents
-            \begin{center}
-                \textbf{Sommario}
-            
-            \end{center}
-            \license
-        \mainmatter
-        \chead{}
-        \rhead{\rightmark}
-        \rfoot{\runauthor}
-        \fancyhead[RO]{\nouppercase{\leftmark}}
-        \fancyhead[LE]{\nouppercase{\rightmark}}
-        \fancyhead[RE]{\runtitle}
-        \fancyhead[LO]{\runtitle}
-        }
-}
-        
-\DeclareOption{colorful}{
+
+%% Default Definitions   
+    \def\counterenvironment{section} %è importante definirlo anche prima con un valore placeholder (section così funziona ovunque) altrimenti dà errore. 
+    %colors
     \colorlet{propositioncolor}{yellow!30!green}
     \colorlet{theoremcolor}{red}
     \colorlet{lemmacolor}{blue}
@@ -74,17 +29,130 @@
     \colorlet{osscolor}{orange!70!yellow}
     \colorlet{propcolor}{cyan}
     \colorlet{examplecolor}{teal}
-}
+    \definecolor{hyperrefcolor}{HTML}{8B0000}
+%% Commands to be run after load
+    \newcommand{\setup}{
+        \makeatletter
+        \let\runauthor\@author
+        \let\runtitle\@title
+        \makeatother
+        \hypersetup{
+            colorlinks=true,
+            linkcolor=hyperrefcolor,
+            filecolor=hyperrefcolor,
+            citecolor = hyperrefcolor,
+            urlcolor=hyperrefcolor,
+            pdftitle={\runtitle},
+            pdfauthor={\runauthor},
+            pdfcreator={\runauthor},
+        }
+    }
 
-\DeclareOption{bw}{
-    \colorlet{propositioncolor}{black}
-    \colorlet{theoremcolor}{black}
-    \colorlet{lemmacolor}{black}
-    \colorlet{corollarycolor}{black}
-    \colorlet{osscolor}{black}
-    \colorlet{propcolor}{black}
-    \colorlet{examplecolor}{black}
-}
+%% Pakcage Options
+    \DeclareOption{article}{
+        \renewcommand{\footrulewidth}{0.4pt}
+        \def\counterenvironment{section}
+        \newcommand{\opening}[1][0.0]{
+            \lhead{}
+            \chead{}
+            \rhead{}
+            \rfoot{}
+            \begin{titlepage}
+                \newgeometry{left=3cm, right=3cm, bottom=2cm, top =3cm} 
+                \pagestyle{empty}
+                    \maketitle
+                    \hrule{}
+                    ~\\~
+                    \tableofcontents
+                    \vspace{\fill}
+                v. #1\\
+                \rule{\linewidth}{0.4pt}\\
+                {\footnotesize\href{mailto:davide.borra@studenti.unitn.it}{davide.borra@studenti.unitn.it} - \href{http://davideborra.github.io}{davideborra.github.io}}
+            \end{titlepage}
+            \restoregeometry
+            \chead{}
+            \rfoot{\runauthor}
+            \fancyhead[RO]{\nouppercase{\leftmark}}
+            \fancyhead[LE]{\nouppercase{\leftmark}}
+            \fancyhead[RE]{\runtitle}
+            \fancyhead[LO]{\runtitle}
+            }
+    }
+
+    \DeclareOption{book}{
+        \def\counterenvironment{chapter}
+        \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+        \renewcommand{\sectionmark}[1]{\markright{#1}}
+        \renewcommand{\footrulewidth}{0.4pt}
+        \newcommand{\subtitle}{}
+        \newcommand{\opening}[1][0.0]{
+            \lhead{}
+            \chead{}
+            \rhead{Indice}
+            \rfoot{\runauthor}
+            
+            \begin{titlepage}
+                \newgeometry{left=3cm, right=3cm, bottom=2cm, top =3cm} 
+                \pagestyle{empty}
+                \begin{center}
+                    \vspace*{\fill}
+                    \vspace{0.5cm}
+                    \textbf{\Huge \runtitle}\\\vspace{5mm}
+                    \textbf{\Large \subtitle}\\
+                    ~\\
+                    \textsc{\Large \runauthor}\\
+                    \vspace{5cm}
+                    
+                \end{center}
+                \vspace*{\fill}
+                % \includegraphics[width=\textwidth]{}\\
+                v. #1\\
+                \rule{0.8\linewidth}{0.5mm}\\
+                {\footnotesize\href{mailto:davide.borra@studenti.unitn.it}{davide.borra@studenti.unitn.it} - \href{http://davideborra.github.io}{davideborra.github.io}}
+                \restoregeometry
+            \end{titlepage}
+            \thispagestyle{empty}
+            \frontmatter
+                \tableofcontents
+                \begin{center}
+                    \textbf{Sommario}
+                
+                \end{center}
+                \license
+            \mainmatter
+            \chead{}
+            \fancyhead[RO]{\nouppercase{\leftmark}}
+            \fancyhead[LE]{\nouppercase{\rightmark}}
+            \fancyhead[RE]{\runtitle}
+            \fancyhead[LO]{\runtitle}
+            }
+    }
+
+    \DeclareOption{print}{
+        \newgeometry{a4paper, portrait, margin=2cm, inner = 2.5 cm, outer = 1.5cm}
+    }
+            
+    % \DeclareOption{colorful}{
+    %     \colorlet{propositioncolor}{yellow!30!green}
+    %     \colorlet{theoremcolor}{red}
+    %     \colorlet{lemmacolor}{blue}
+    %     \colorlet{corollarycolor}{orange}
+    %     \colorlet{osscolor}{orange!70!yellow}
+    %     \colorlet{propcolor}{cyan}
+    %     \colorlet{examplecolor}{teal}
+    %     \definecolor{hyperrefcolor}{HTML}{8B0000}
+    % }
+
+    \DeclareOption{bw}{
+        \colorlet{propositioncolor}{black}
+        \colorlet{theoremcolor}{black}
+        \colorlet{lemmacolor}{black}
+        \colorlet{corollarycolor}{black}
+        \colorlet{osscolor}{black}
+        \colorlet{propcolor}{black}
+        \colorlet{examplecolor}{black}
+        \colorlet{hyperrefcolor}{black}
+    }
 
 %% Fallback
 \DeclareOption*{
@@ -93,283 +161,228 @@
 
 \ProcessOptions\relax
 
-\usepackage{footnote}
-\BeforeBeginEnvironment{tcolorbox}{\savenotes}
-\AfterEndEnvironment{tcolorbox}{\spewnotes}
+%% Theorem definition
+    \newcounter{enunciati}
+    \counterwithin{enunciati}{\counterenvironment}
 
-\theoremstyle{definition}                                   %stile con testo normale
-\newcounter{enunciati}
-\counterwithin{enunciati}{\counterenvironment}
-\newtheorem{xprop}[enunciati]{\color{propcolor}Proprietà}
-\newtheorem{xcorollary}[enunciati]{\color{corollarycolor}Corollario}
-
-\theoremstyle{remark}                                       %stile con nome italico e testo normale
-\newtheorem{xoss}[enunciati]{\color{osscolor}Osservazione}
-%\newcommand{\prop}{\addtocounter{definition}{1}\paragraph{Proprietà \thedefinition}}
-
-% Definitions - numbered
-    \theoremstyle{plain}                                        %stile con testo italico
-        \newtheorem{theorem}[enunciati]{\color{theoremcolor}Teorema}
-        
+    % Inner theorems
+    \theoremstyle{definition}
+        \newtheorem{definition}[enunciati]{DEF}
+        \theoremstyle{remark}
+        \newtheorem{xoss}[enunciati]{\color{osscolor}Osservazione}
+        \theoremstyle{plain}
+        \newtheorem{theorem}[enunciati]{\color{theoremcolor}Teorema} 
         \newtheorem{xlemma}[enunciati]{\color{lemmacolor}Lemma}
-
         \newtheorem{xproposition}[enunciati]{\color{propositioncolor}Proposizione}
+        \newtheorem{xcorollary}[enunciati]{\color{corollarycolor}Corollario}
 
-    \newenvironment{lemma}{
-    \begin{tcolorbox}[
-        colframe=lemmacolor, 
-        colback = white,
-        enhanced jigsaw, breakable,
-        arc=0mm, 
-        rightrule=0mm,
-        toprule=0mm,
-        titlerule=0mm,
-        bottomrule=0mm,
-        left = 1mm,
-        top = 1mm,
-        bottom = 1mm,
-        right = 1mm,
-        bottomrule at break=0mm
-        ]
-        \begin{xlemma}
-}{
-        \end{xlemma}
-    \end{tcolorbox}
-}
-
-\newenvironment{proposition}{
-    \begin{tcolorbox}[
-        colframe=propositioncolor, 
-        colback = white,
-        enhanced jigsaw, breakable,
-        arc=0mm, 
-        rightrule=0mm,
-        toprule=0mm,
-        titlerule=0mm,
-        bottomrule=0mm,
-        left = 1mm,
-        top = 1mm,
-        bottom = 1mm,
-        right = 1mm,
-        bottomrule at break=0mm,
-        ]
-        \begin{xproposition}
-}{
-        \end{xproposition}
-    \end{tcolorbox}
-}
-
-\newenvironment{prop}{
-    \begin{tcolorbox}[
-        colframe=propcolor, 
-        colback = white,
-        enhanced jigsaw, breakable,
-        arc=0mm, 
-        rightrule=0mm,
-        toprule=0mm,
-        titlerule=0mm,
-        bottomrule=0mm,
-        left = 1mm,
-        top = 1mm,
-        bottom = 1mm,
-        right = 1mm,
-        bottomrule at break=0mm,
-        ]
-        \begin{xprop}
-}{
-        \end{xprop}
-    \end{tcolorbox}
-}
-
-\newenvironment{shadedTheorem}{
-    \begin{tcolorbox}[
-        colframe = theoremcolor, 
-        colback = theoremcolor!10,
-        enhanced jigsaw, breakable,
-        arc=0mm, 
-        rightrule=0mm,
-        toprule=0mm,
-        titlerule=0mm,
-        bottomrule=0mm,
-        left = 1mm,
-        top = 1mm,
-        bottom = 1mm,
-        right = 1mm,
-        bottomrule at break=0mm,
-        ]
-        \begin{theorem}
-}{
-        \end{theorem}
-    \end{tcolorbox}
-}
-
-\newenvironment{corollary}{
-    \begin{tcolorbox}[
-        colframe=corollarycolor, 
-        colback = white,
-        enhanced jigsaw, breakable,
-        arc=0mm, 
-        rightrule=0mm,
-        toprule=0mm,
-        titlerule=0mm,
-        bottomrule=0mm,
-        left = 1mm,
-        top = 1mm,
-        bottom = 1mm,
-        right = 1mm,
-        bottomrule at break=0mm,
-        ]
-        \begin{xcorollary}
-}{
-        \end{xcorollary}
-    \end{tcolorbox}
-}
-
-\newenvironment{oss}{
-    \begin{tcolorbox}[
-        colframe=osscolor, 
-        colback = white,
-        enhanced jigsaw, breakable,
-        arc=0mm, 
-        rightrule=0mm,
-        toprule=0mm,
-        titlerule=0mm,
-        bottomrule=0mm,
-        left = 1mm,
-        top = 1mm,
-        bottom = 1mm,
-        right = 1mm,
-        bottomrule at break=0mm,
-        ]
-        \begin{xoss}
-}{
-        \end{xoss}
-    \end{tcolorbox}
-}
-
-\newcounter{example}
-\counterwithin{example}{\counterenvironment}
-
-\newenvironment{ex}[1][]{
-    \addtocounter{example}{1}
-    \if#1\relax
-        \begin{tcolorbox}[
-        title={\textbf{Esempio \theexample.}},
-        coltitle=examplecolor,
-        colbacktitle=white,
-        colback=white,
-        colframe=examplecolor, 
-        enhanced jigsaw, breakable,
-        arc=0mm, 
-        rightrule=0mm,
-        toprule=0mm,
-        titlerule=0mm,
-        top = 0mm,
-        bottomrule at break=0mm,subtitle style={boxrule=0pt,
-        colback=examplecolor!20!white, colupper=black} 
-        ]
-    \else
-        \begin{tcolorbox}[
-        title={\textbf{Esempio \theexample} (#1)\textbf{.}},
-        coltitle=examplecolor,
-        colbacktitle=white,
-        colback=white,
-        colframe=examplecolor, 
-        enhanced jigsaw, breakable,
-        arc=0mm, 
-        rightrule=0mm,
-        toprule=0mm,
-        titlerule=0mm,
-        top = 0mm,
-        bottomrule at break=0mm,
-        subtitle style={boxrule=0pt,
-        colback=examplecolor!20!white, colupper=black}
-        ]
-    \fi
-}{
-        \end{tcolorbox}
-}
-
-\newenvironment{ex*}[1][]{
-    \addtocounter{example}{1}
-    \if#1\relax
-        \begin{tcolorbox}[
-        title={\textbf{Esempio}},
-        coltitle=examplecolor,
-        colbacktitle=white,
-        colback=white,
-        colframe=examplecolor, 
-        enhanced jigsaw, breakable,
-        arc=0mm, 
-        rightrule=0mm,
-        toprule=0mm,
-        titlerule=0mm,
-        top = 0mm,
-        bottomrule at break=0mm,subtitle style={boxrule=0pt,
-        colback=examplecolor!20!white, colupper=black} 
-        ]
-    \else
-        \begin{tcolorbox}[
-        title={\textbf{Esempio} (#1)\textbf{.}},
-        coltitle=examplecolor,
-        colbacktitle=white,
-        colback=white,
-        colframe=examplecolor, 
-        enhanced jigsaw, breakable,
-        arc=0mm, 
-        rightrule=0mm,
-        toprule=0mm,
-        titlerule=0mm,
-        top = 0mm,
-        bottomrule at break=0mm,
-        subtitle style={boxrule=0pt,
-        colback=examplecolor!20!white, colupper=black}
-        ]
-    \fi
-}{
-        \end{tcolorbox}
-}
-
-
-%% Fundamental Packages
-    \RequirePackage[a4paper, portrait, margin=2cm]{geometry}    %paper shape
-
-%% Header
-    \RequirePackage{fancyhdr}
-    \pagestyle{fancy}
-%% Text format
-    \RequirePackage{enumitem}          %modifying enumerations
-
-%% Listoffigures
-    \counterwithin{figure}{section}
-    \newcommand{\figcaption}[2][]{\caption[#2 - #1]{#2}}
-
-%% Definitions-theorems-examples static
-
-    \theoremstyle{definition}                                   %stile con testo normale
-    \newtheorem{definition}[enunciati]{DEF}
-    \newtheorem*{def*}{DEF}
-
-    \theoremstyle{remark}
-    \newtheorem*{ricorda}{Ricorda}
-
-    %Alternative proofs
-    \newenvironment{excproof}[1][Dimostrazione]
-    {
-        \renewcommand\qedsymbol{$\square$}
-        \begin{proof}[#1]%[\Large\dimostrazione]
-    }{
-        \end{proof}
-        \renewcommand\qedsymbol{QED}
-    }
-
-    \theoremstyle{plain}
-    \newtheorem{exc}{Esercizio}[\counterenvironment]
-    \newtheorem{axiom}{Assioma}[\counterenvironment]
-    \newtheorem{law}{Legge}[\counterenvironment]
-
+    % Theorem boxes
     \newenvironment{boxdef}{\begin{lineframe}\begin{definition}}{\end{definition}\end{lineframe}}
 
+    \newenvironment{lemma}{
+        \begin{tcolorbox}[
+            colframe=lemmacolor, 
+            colback = white,
+            enhanced jigsaw, breakable,
+            arc=0mm, 
+            rightrule=0mm,
+            toprule=0mm,
+            titlerule=0mm,
+            bottomrule=0mm,
+            left = 1mm,
+            top = 1mm,
+            bottom = 1mm,
+            right = 1mm,
+            bottomrule at break=0mm
+            ]
+            \begin{xlemma}
+    }{
+            \end{xlemma}
+        \end{tcolorbox}
+    }
+
+    \newenvironment{proposition}{
+        \begin{tcolorbox}[
+            colframe=propositioncolor, 
+            colback = white,
+            enhanced jigsaw, breakable,
+            arc=0mm, 
+            rightrule=0mm,
+            toprule=0mm,
+            titlerule=0mm,
+            bottomrule=0mm,
+            left = 1mm,
+            top = 1mm,
+            bottom = 1mm,
+            right = 1mm,
+            bottomrule at break=0mm,
+            ]
+            \begin{xproposition}
+    }{
+            \end{xproposition}
+        \end{tcolorbox}
+    }
+
+    \newenvironment{thm}{
+        \begin{tcolorbox}[
+            colframe = theoremcolor, 
+            colback = theoremcolor!10,
+            enhanced jigsaw, breakable,
+            arc=0mm, 
+            rightrule=0mm,
+            toprule=0mm,
+            titlerule=0mm,
+            bottomrule=0mm,
+            left = 1mm,
+            top = 1mm,
+            bottom = 1mm,
+            right = 1mm,
+            bottomrule at break=0mm,
+            ]
+            \begin{theorem}
+    }{
+            \end{theorem}
+        \end{tcolorbox}
+    }
+
+    \newenvironment{corollary}{
+        \begin{tcolorbox}[
+            colframe=corollarycolor, 
+            colback = white,
+            enhanced jigsaw, breakable,
+            arc=0mm, 
+            rightrule=0mm,
+            toprule=0mm,
+            titlerule=0mm,
+            bottomrule=0mm,
+            left = 1mm,
+            top = 1mm,
+            bottom = 1mm,
+            right = 1mm,
+            bottomrule at break=0mm,
+            ]
+            \begin{xcorollary}
+    }{
+            \end{xcorollary}
+        \end{tcolorbox}
+    }
+
+    \newenvironment{oss}{
+        \begin{tcolorbox}[
+            colframe=osscolor, 
+            colback = white,
+            enhanced jigsaw, breakable,
+            arc=0mm, 
+            rightrule=0mm,
+            toprule=0mm,
+            titlerule=0mm,
+            bottomrule=0mm,
+            left = 1mm,
+            top = 1mm,
+            bottom = 1mm,
+            right = 1mm,
+            bottomrule at break=0mm,
+            ]
+            \begin{xoss}
+    }{
+            \end{xoss}
+        \end{tcolorbox}
+    }
+
+%% Examples
+    \newcounter{example}
+    \counterwithin{example}{\counterenvironment}
+
+    \newenvironment{ex}[1][]{
+        \addtocounter{example}{1}
+        \if#1\relax
+            \begin{tcolorbox}[
+            title={\textbf{Esempio \theexample.}},
+            coltitle=examplecolor,
+            colbacktitle=white,
+            colback=white,
+            colframe=examplecolor, 
+            enhanced jigsaw, breakable,
+            arc=0mm, 
+            rightrule=0mm,
+            toprule=0mm,
+            titlerule=0mm,
+            top = 0mm,
+            bottomrule at break=0mm,subtitle style={boxrule=0pt,
+            colback=examplecolor!20!white, colupper=black} 
+            ]
+        \else
+            \begin{tcolorbox}[
+            title={\textbf{Esempio \theexample} (#1)\textbf{.}},
+            coltitle=examplecolor,
+            colbacktitle=white,
+            colback=white,
+            colframe=examplecolor, 
+            enhanced jigsaw, breakable,
+            arc=0mm, 
+            rightrule=0mm,
+            toprule=0mm,
+            titlerule=0mm,
+            top = 0mm,
+            bottomrule at break=0mm,
+            subtitle style={boxrule=0pt,
+            colback=examplecolor!20!white, colupper=black}
+            ]
+        \fi
+    }{
+            \end{tcolorbox}
+    }
+
+    \newenvironment{ex*}[1][]{
+        \addtocounter{example}{1}
+        \if#1\relax
+            \begin{tcolorbox}[
+            title={\textbf{Esempio}},
+            coltitle=examplecolor,
+            colbacktitle=white,
+            colback=white,
+            colframe=examplecolor, 
+            enhanced jigsaw, breakable,
+            arc=0mm, 
+            rightrule=0mm,
+            toprule=0mm,
+            titlerule=0mm,
+            top = 0mm,
+            bottomrule at break=0mm,subtitle style={boxrule=0pt,
+            colback=examplecolor!20!white, colupper=black} 
+            ]
+        \else
+            \begin{tcolorbox}[
+            title={\textbf{Esempio} (#1)\textbf{.}},
+            coltitle=examplecolor,
+            colbacktitle=white,
+            colback=white,
+            colframe=examplecolor, 
+            enhanced jigsaw, breakable,
+            arc=0mm, 
+            rightrule=0mm,
+            toprule=0mm,
+            titlerule=0mm,
+            top = 0mm,
+            bottomrule at break=0mm,
+            subtitle style={boxrule=0pt,
+            colback=examplecolor!20!white, colupper=black}
+            ]
+        \fi
+    }{
+            \end{tcolorbox}
+    }
+
+
+%% Unnumbered theorems
+    \theoremstyle{remark}
+    \newtheorem*{ricorda}{Ricorda}
+%% Extra Theorems
+    \theoremstyle{plain}
+    \newtheorem{exc}{Esercizio}[\counterenvironment]
+
+    
+%% Grid
     \newtcolorbox{gridtcolorbox}{enhanced, arc=0mm, boxrule=0.25mm, colframe=black!20, colback=white, breakable,
     underlay={
         \begin{tcbclipinterior}
@@ -378,14 +391,11 @@
         \end{tcbclipinterior}
     }
     }
-
-% min height 0.59, max height 24.9
+    % min height 0.59, max height 24.9
     \newcommand{\grid}[2][0.59cm]{
         \begin{gridtcolorbox}
         \vspace{#1}
         \vphantom{#2}    
     \end{gridtcolorbox}
     }
-
-
 \endinput

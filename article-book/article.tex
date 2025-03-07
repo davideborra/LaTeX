@@ -1,59 +1,19 @@
 \documentclass[twoside]{article}
-\usepackage[article]{lambdabook}
 \usepackage{lambdatex}
+\usepackage[article]{lambdabook}
 
 \title{Modello}
 \author{Davide Borra}
 \date{}
-\makeatletter
-\let\runauthor\@author
-\let\runtitle\@title
-\makeatother
-\renewcommand{\sectionmark}[1]{\markright{#1}}
-\renewcommand{\footrulewidth}{0.4pt}
+\setup
 
-%\everymath{\displaystyle}
 
 \begin{document}
-
-\lhead{}
-\chead{}
-\rhead{Indice}
-\rfoot{\runauthor}
-
-\begin{titlepage}
-    \newgeometry{left=3cm, right=3cm, bottom=2cm, top =3cm} 
-    \pagestyle{empty}
-    \begin{center}
-        \vspace*{\fill}
-        \vspace{0.5cm}
-        \textbf{\Huge \runtitle}\\\vspace{5mm}
-        \textsc{\Large \runauthor}
-        \vspace{5cm}
-    \end{center}
-    \vspace*{\fill}
-    v. 1.0\\
-    \rule{0.8\linewidth}{0.5mm}\\
-    {\footnotesize\href{mailto:davide.borra@studenti.unitn.it}{davide.borra@studenti.unitn.it} - \href{http://davideborra.github.io}{davideborra.github.io}}
-    \restoregeometry\newpage
-    \thispagestyle{empty}
-\end{titlepage}
+    \opening
     \begin{abstract}
         \centering <sommario>
     \end{abstract}
-    \tableofcontents
-    \creativecommons
-    \newpage
-    
-    \chead{}
-    \rfoot{\runauthor}
-    \fancyhead[RO]{\nouppercase{\rightmark}}
-    \fancyhead[LE]{\nouppercase{\rightmark}}
-    \fancyhead[RE]{\runtitle}
-    \fancyhead[LO]{\runtitle}
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    \section{Pippo}
-
+    \section{}
 
 \end{document}
