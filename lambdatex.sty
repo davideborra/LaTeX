@@ -1,5 +1,5 @@
-% V. 5.3
-% update 13/04/2023
+% V. 6.0
+% update 07/03/2025
 \ProvidesPackage{lambdatex}
 
 %% Fundamental packages
@@ -11,6 +11,13 @@
     \RequirePackage{graphicx}                                   %for adding figures
     \RequirePackage{wrapfig}                                    %figures alignment
     \RequirePackage{subcaption}                                 %for subfigures
+
+%% Graphics
+    \RequirePackage{xcolor}                                     %Custom colors
+    \RequirePackage{mdframed}                                   %Boxes
+
+%% Text format
+    \RequirePackage{dirtytalk}                                  %quotes
 
 %% Tables
     \RequirePackage{array}                                      %table management
@@ -32,25 +39,28 @@
     \RequirePackage{standalone}                                 %external matlab tikz files
     
 %% Links
-    \RequirePackage{url}                                       %clickable links
-    \RequirePackage{hyperref}                                  %toc links
+    \RequirePackage{url}                                        %clickable links
+    \RequirePackage{hyperref}                                   %toc links
 
-%% Symbols and Fonts
-    \RequirePackage{amsfonts}                                   %per simboli insiemi numerici
-    \RequirePackage{amsmath}                                    %per coefficienti binomiali
-    \RequirePackage{amssymb}                                    %per simbolo insieme vuoto \varnothing
-    \RequirePackage[mathscr]{euscript}                          %mathcal alternativo: \mathscr
-    \RequirePackage{yhmath}                                     %arco con \wideparen{AB}
-    \RequirePackage{cancel}                                     %cancel per barrare elementi
-    \RequirePackage{esint}                                      %integrali particolari (e.g. \fint)
+%% AMS
+    \RequirePackage{amsfonts}
+    \RequirePackage{amsmath}
+    \RequirePackage{amsthm}
+
+%% Symbols 
+    \RequirePackage{cancel}                                     %cancel
+    \RequirePackage{esint}                                      %integrali particolari
     \RequirePackage{fontawesome5}                               %font awesome 
 
-    \DeclareFontFamily{OT1}{pzc}{}                              %per avere mathpzc che è meglio di mathcal perchè ha le minuscole
-    \DeclareFontShape{OT1}{pzc}{m}{it}%
-    {<-> s * [1.15] pzcmi7t}{}
-    \DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
-%% Symbols definitions
-    \newcommand\parallelo{{/\!/}}                               %simbolo parallelismo
+%% Mathematical Fonts
+    \RequirePackage{amssymb}                                    %per simbolo insieme vuoto \varnothing
+    \RequirePackage[mathscr]{euscript}                          %mathcal alternativo: \mathscr
+    \RequirePackage{mathrsfs}                                   %mathcal alternativo: \mathrsfs
+    \let\mathrsfs\mathscr
+    \let\mathscr\EuScript
+
+%% Symbols definitions  
+    % Trig functions
     \newcommand\sen{\operatorname{sen}}                         %seno
     \renewcommand\sin{\operatorname{sen}}                       %seno
     \newcommand\senh{\operatorname{senh}}                       %seno iperbolico
@@ -61,43 +71,52 @@
     \newcommand\cotg{\operatorname{cotg}}                       %cotangente
     \newcommand\arctg{\operatorname{arctg}}                     %arcotangente
     \newcommand\arccotg{\operatorname{arccotg}}                 %arcocotangente
-    \newcommand\deq{\overset{\mathrm{def}}{=}}                  %uguale definizione
+    % Other operator names
     \renewcommand\Im{\operatorname{Im}}                         %Parte immaginaria
     \renewcommand\Re{\operatorname{Re}}                         %Parte immaginaria
     \newcommand\dom{\operatorname{dom}}                         %dominio
     \newcommand{\rk}{\operatorname{rk}}                         %rango
-    \renewcommand*{\d}{\:\textnormal{d}}                              %differential
-    \let\sottosp\vartriangleleft                                %sottospazio vettoriale
-    \newcommand{\gln}[2]{\mathpzc{Gl}_{#1}(#2)}                 %Gruppo lineare generale
+    \renewcommand*{\d}{\:\textnormal{d}}                        %differential
+    %groups
+    \let\nsg\vartriangleleft                                    %sottogruppo normale
+    \newcommand\Aut{\operatorname{Aut}}
+    % matrice groups
+    \newcommand{\M}{\textnormal{\textsf{M}}}                    %Matrices
+    \newcommand{\GL}{\textnormal{\textsf{GL}}}                  %Gruppo lineare generale
+    \newcommand{\PGL}{\textnormal{\textsf{PGL}}}                %Gruppo lineare generale
+    \newcommand{\SL}{\textnormal{\textsf{SL}}}                  %Gruppo lineare speciale
+    \newcommand{\Og}{\textnormal{\textsf{O}}}                   %Gruppo ortogonale
+    \newcommand{\SO}{\textnormal{\textsf{SO}}}                  %Gruppo ortogonale speciale
+    \newcommand{\Sp}{\textnormal{\textsf{Sp}}}                  %Gruppo simplettico
+    % lie algebras 
+    \newcommand{\lA}{\textnormal{\textsf{A}}}                   %lie group A    
+    \newcommand{\lB}{\textnormal{\textsf{B}}}                   %lie group B
+    \newcommand{\lC}{\textnormal{\textsf{C}}}                   %lie group C
+    \newcommand{\lD}{\textnormal{\textsf{D}}}                   %lie group D
+    \newcommand{\lE}{\textnormal{\textsf{E}}}                   %lie group C
+    \newcommand{\lF}{\textnormal{\textsf{F}}}                   %lie group D
     %arrows
-    \RequirePackage[new]{old-arrows}                                  %per \longhookrightarrow
-    \newcommand\Harr{\Leftrightarrow}                           %se e solo se
-    \newcommand\Larr{\Leftarrow}
-    \newcommand\Rarr{\Rightarrow}
+    \RequirePackage[new]{old-arrows}                            %per \longhookrightarrow
+    \newcommand\Harr{\Leftrightarrow}                           %horizontal bb arrow
+    \newcommand\Larr{\Leftarrow}                                %left bb arrow
+    \newcommand\Rarr{\Rightarrow}                               %right bb arrow
     \newcommand{\injarr}{\hookrightarrow}                       %injection arrow
     \newcommand{\surjarr}{\twoheadrightarrow}                   %surjection arrow
-    \newcommand{\longinjarr}{\longhookrightarrow}                       %injection arrow
-    \newcommand{\longsurjarr}{-\!\!\!-\!\!\!\twoheadrightarrow}                   %surjection arrow
-
-    % Number sets
+    \newcommand{\longinjarr}{\longhookrightarrow}               %injection arrow
+    \newcommand{\longsurjarr}{-\!\!\!-\!\!\!\twoheadrightarrow} %surjection arrow
+    % Blackboard Bold
     \newcommand\N{\mathbb{N}}
     \newcommand\Z{\mathbb{Z}}
     \newcommand\Q{\mathbb{Q}}
     \newcommand\R{\mathbb{R}}
     \newcommand\C{\mathbb{C}}
-    %Fields
     \newcommand\K{\mathbb{K}}
-    %Spazi affini
     \newcommand\A{\mathbb{A}}
-    %Spazi euclidei
     \newcommand\E{\mathbb{E}}
-    %Spazi proiettivi
-    \renewcommand\P{\mathbb{P}}
-    %Conde
-    \newcommand{\dimostrazione}{$D{\!\!\!\!\!\raisebox{1.8pt}{$\rotatebox{-20}{$\textstyle\int$}$}}$\!\!}
-    \newcommand{\forallbut}{\operatorname{\forall\!\!\;\!\! \raisebox{4.45pt}{\rotatebox{-60}{$\scriptstyle\smallfrown$}}\!\!}}
-    \newcommand{\fordots}[1]{{\overset{\overset{#1}{\smile}}{\dots}}}
-    %mathcal abbreviation
+    %Set theory
+    \renewcommand\P{\mathscr{P}}
+    \renewcommand{\setminus}{\smallsetminus}
+    %mathfont abbreviation
     \let\mc\mathcal
     \let\bb\mathbb
     %topology subsets symbols
@@ -107,10 +126,10 @@
     % Underset commands
     \newcommand{\underin}[2]{\underset{\substack{\rotatebox{270}{$\scriptstyle\in$}\\{#2}}}{{#1}}}
     \newcommand{\underni}[2]{\underset{\substack{\rotatebox{90}{$\scriptstyle\in$}\\{#2}}}{{#1}}}
-
-
-
-\newcommand{\TODO}{{\color{red}\boxed{\textbf{\sffamily\large \!TODO\!}}}}
+    %text commands
+    \newcommand{\ie}{\textit{i.e. }}
+    \newcommand{\cfr}{\textit{cfr. }}
+    \newcommand{\TODO}{{\color{red}\boxed{\textbf{\sffamily\large \!TODO\!}}}}
     
 
 %% Macros
@@ -120,17 +139,8 @@
                  & #4 & \longmapsto     & #5
         \end{array}
         }
-
-%% Graphics
-    \RequirePackage{xcolor}                                     %Custom colors
-    \RequirePackage{mdframed}                                   %Boxes (shaded theorems, ...)
-    %\everymath{\displaystyle}
-    \input{insbox}                                              %Boxes for minipage
-
-%% Text format
-    \RequirePackage{dirtytalk}                                  %quotes
+    \newcommand{\fordots}[1]{{\overset{\overset{#1}{\smile}}{\dots}}}
     
-
 %% Frames
     \newenvironment{shaded}%
     {\begin{mdframed}[backgroundcolor=lightgray!40, linecolor=white, innertopmargin=4pt, innerbottommargin=13pt]}%
@@ -140,21 +150,7 @@
     {\begin{mdframed}[linecolor=black, innertopmargin=0pt, innerbottommargin=10pt]}%
     {\end{mdframed}}
 
-%% Text boxes
-\newenvironment{focus}[1][Focus]
-{\begin{mdframed}[linecolor=black, innertopmargin=8pt, innerbottommargin=10pt]\textbf{\large #1.}\vspace{3pt}\\}
-{\end{mdframed}}
-
-%% Theorems
-\RequirePackage{amsthm}                                         %per teoremi non numerati
-\renewcommand\qedsymbol{QED}                                    %QED Symbol
-
-%% Meme
-\newcommand{\christmaswedge}{{\displaystyle \color{teal} \bigwedge^{{\color{yellow} \star}}}{\color{red}\!\!\!\!\!\!\!\;\cdot \!\!\;\dot ~.}}
-\newcommand\amongus{{{~_{~_{~_{\displaystyle~_{~_\sqcup\!\!\!\!~^\sqcap\!\!\!\!~_\sqcup}}}}\!\!\!\!\!\!\!\!\!\!\!\!{~^{~_\supset}}\!\!\!\!\!\bigcap\,\!\!{\scriptstyle]}}}}
-
 %%License
-
 \newcommand{\license}{
     \begin{center}
         % \rule{0.9\linewidth}{0.5pt}\\
