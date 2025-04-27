@@ -77,17 +77,28 @@
     \newcommand\dom{\operatorname{dom}}                         %dominio
     \newcommand{\rk}{\operatorname{rk}}                         %rango
     \renewcommand*{\d}{\:\textnormal{d}}                        %differential
+    \newcommand{\Tg}{\operatorname{T}}                          %Tangent space
     %groups
     \let\nsg\vartriangleleft                                    %sottogruppo normale
-    \newcommand\Aut{\operatorname{Aut}}
-    % matrice groups
-    \newcommand{\M}{\textnormal{\textsf{M}}}                    %Matrices
-    \newcommand{\GL}{\textnormal{\textsf{GL}}}                  %Gruppo lineare generale
-    \newcommand{\PGL}{\textnormal{\textsf{PGL}}}                %Gruppo lineare generale
-    \newcommand{\SL}{\textnormal{\textsf{SL}}}                  %Gruppo lineare speciale
-    \newcommand{\Og}{\textnormal{\textsf{O}}}                   %Gruppo ortogonale
-    \newcommand{\SO}{\textnormal{\textsf{SO}}}                  %Gruppo ortogonale speciale
-    \newcommand{\Sp}{\textnormal{\textsf{Sp}}}                  %Gruppo simplettico
+    \newcommand\rg{\operatorname{R}}                            %radicale di un gruppo
+    \newcommand{\z}{\operatorname{Z}}                           % zero locus
+    \newcommand{\I}{\operatorname{I}}                           % zeros ideal
+    % morphism sets 
+    \newcommand{\Hom}{\operatorname{Hom}}                       %Homomorphisms
+    \newcommand{\End}{\operatorname{End}}                       %Endomorphisms
+    \newcommand{\Aut}{\operatorname{Aut}}                       %Automorphisms
+    \newcommand{\Der}{\operatorname{Der}}                       %Derivations
+    % matrices groups
+    \newcommand{\M}{\textnormal{\textsf{M}}}                                 %Matrices
+    \newcommand{\T}{\textnormal{\textsf{T}}}                                 %Triangular Matrices
+    \newcommand{\GL}{\textnormal{\textsf{GL}}}                               %Gruppo lineare generale
+    \newcommand{\PGL}{\textnormal{\textsf{PGL}}}                             %Gruppo lineare generale proiettivo
+    \newcommand{\SL}{\textnormal{\textsf{SL}}}                               %Gruppo lineare speciale
+    \newcommand{\Og}{\textnormal{\textsf{O}}}                                %Gruppo ortogonale
+    \newcommand{\SO}{\textnormal{\textsf{SO}}}                               %Gruppo ortogonale speciale
+    \newcommand{\PSO}{\textnormal{\textsf{PSO}}}                             %Gruppo ortogonale speciale proiettivo
+    \newcommand{\Sp}{\textnormal{\textsf{Sp}}}                               %Gruppo simplettico
+    \newcommand{\PSp}{\textnormal{\textsf{PSp}}}                             %Gruppo simplettico proiettivo
     % lie algebras 
     \newcommand{\lA}{\textnormal{\textsf{A}}}                   %lie group A    
     \newcommand{\lB}{\textnormal{\textsf{B}}}                   %lie group B
@@ -95,6 +106,7 @@
     \newcommand{\lD}{\textnormal{\textsf{D}}}                   %lie group D
     \newcommand{\lE}{\textnormal{\textsf{E}}}                   %lie group C
     \newcommand{\lF}{\textnormal{\textsf{F}}}                   %lie group D
+    \newcommand{\gl}{\mathfrak{gl}}                             %lie algebra gln
     %arrows
     \RequirePackage[new]{old-arrows}                            %per \longhookrightarrow
     \newcommand\Harr{\Leftrightarrow}                           %horizontal bb arrow
@@ -116,6 +128,7 @@
     %Set theory
     \renewcommand\P{\mathscr{P}}
     \renewcommand{\setminus}{\smallsetminus}
+    
     %mathfont abbreviation
     \let\mc\mathcal
     \let\bb\mathbb
