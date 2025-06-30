@@ -1,5 +1,5 @@
-% V. 5.0
-% update 07/03/2025
+% V. 5.1
+% update 26/05/2025
 \ProvidesPackage{lambdabook}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -131,17 +131,6 @@
     \DeclareOption{print}{
         \newgeometry{a4paper, portrait, margin=2cm, inner = 2.5 cm, outer = 1.5cm}
     }
-            
-    % \DeclareOption{colorful}{
-    %     \colorlet{propositioncolor}{yellow!30!green}
-    %     \colorlet{theoremcolor}{red}
-    %     \colorlet{lemmacolor}{blue}
-    %     \colorlet{corollarycolor}{orange}
-    %     \colorlet{osscolor}{orange!70!yellow}
-    %     \colorlet{propcolor}{cyan}
-    %     \colorlet{examplecolor}{teal}
-    %     \definecolor{hyperrefcolor}{HTML}{8B0000}
-    % }
 
     \DeclareOption{bw}{
         \colorlet{propositioncolor}{black}
@@ -290,89 +279,57 @@
     }
 
 %% Examples
-    \newcounter{example}
-    \counterwithin{example}{\counterenvironment}
-
+    \newcommand{\exampleTitle}{}
     \newenvironment{ex}[1][]{
-        \addtocounter{example}{1}
+        \refstepcounter{enunciati}
         \if#1\relax
-            \begin{tcolorbox}[
-            title={\textbf{Esempio \theexample.}},
-            coltitle=examplecolor,
-            colbacktitle=white,
-            colback=white,
-            colframe=examplecolor, 
-            enhanced jigsaw, breakable,
-            arc=0mm, 
-            rightrule=0mm,
-            toprule=0mm,
-            titlerule=0mm,
-            top = 0mm,
-            bottomrule at break=0mm,subtitle style={boxrule=0pt,
-            colback=examplecolor!20!white, colupper=black} 
-            ]
         \else
-            \begin{tcolorbox}[
-            title={\textbf{Esempio \theexample} (#1)\textbf{.}},
-            coltitle=examplecolor,
-            colbacktitle=white,
-            colback=white,
-            colframe=examplecolor, 
-            enhanced jigsaw, breakable,
-            arc=0mm, 
-            rightrule=0mm,
-            toprule=0mm,
-            titlerule=0mm,
-            top = 0mm,
-            bottomrule at break=0mm,
-            subtitle style={boxrule=0pt,
-            colback=examplecolor!20!white, colupper=black}
-            ]
+            \renewcommand{\exampleTitle}{ (#1)}
         \fi
+        \begin{tcolorbox}[
+        title={\textbf{Example \theenunciati}\exampleTitle\textbf{.}},
+        coltitle=examplecolor,
+        colbacktitle=white,
+        colback=white,
+        colframe=examplecolor, 
+        enhanced jigsaw, breakable,
+        arc=0mm, 
+        rightrule=0mm,
+        toprule=0mm,
+        titlerule=0mm,
+        top = 0mm,
+        bottomrule at break=0mm,
+        subtitle style={boxrule=0pt,
+        colback=examplecolor!20!white, colupper=black}
+        ]
     }{
             \end{tcolorbox}
     }
 
     \newenvironment{ex*}[1][]{
-        \addtocounter{example}{1}
         \if#1\relax
-            \begin{tcolorbox}[
-            title={\textbf{Esempio}},
-            coltitle=examplecolor,
-            colbacktitle=white,
-            colback=white,
-            colframe=examplecolor, 
-            enhanced jigsaw, breakable,
-            arc=0mm, 
-            rightrule=0mm,
-            toprule=0mm,
-            titlerule=0mm,
-            top = 0mm,
-            bottomrule at break=0mm,subtitle style={boxrule=0pt,
-            colback=examplecolor!20!white, colupper=black} 
-            ]
         \else
-            \begin{tcolorbox}[
-            title={\textbf{Esempio} (#1)\textbf{.}},
-            coltitle=examplecolor,
-            colbacktitle=white,
-            colback=white,
-            colframe=examplecolor, 
-            enhanced jigsaw, breakable,
-            arc=0mm, 
-            rightrule=0mm,
-            toprule=0mm,
-            titlerule=0mm,
-            top = 0mm,
-            bottomrule at break=0mm,
-            subtitle style={boxrule=0pt,
-            colback=examplecolor!20!white, colupper=black}
-            ]
+            \renewcommand{\exampleTitle}{ (#1)}
         \fi
+        \begin{tcolorbox}[
+        title={\textbf{Example}\exampleTitle\textbf{.}},
+        coltitle=examplecolor,
+        colbacktitle=white,
+        colback=white,
+        colframe=examplecolor, 
+        enhanced jigsaw, breakable,
+        arc=0mm, 
+        rightrule=0mm,
+        toprule=0mm,
+        titlerule=0mm,
+        top = 0mm,
+        bottomrule at break=0mm,
+        subtitle style={boxrule=0pt,
+        colback=examplecolor!20!white, colupper=black}
+        ]
     }{
             \end{tcolorbox}
     }
-
 
 %% Unnumbered theorems
     \theoremstyle{remark}
